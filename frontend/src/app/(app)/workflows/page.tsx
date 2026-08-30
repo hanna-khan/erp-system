@@ -12,8 +12,8 @@ import { Droplets, ExternalLink, Shirt, Waves } from "lucide-react";
 const demos = [
   {
     id: "tshirt",
-    title: "T-shirt end-to-end",
-    subtitle: "SO-1024 · Fashion Retailer A · 10,000 pcs",
+    title: "Prism Kaftaan end-to-end",
+    subtitle: "SO-1024 · Boutique Collective PK · 10,000 pcs",
     icon: Shirt,
     steps: tshirtWorkflow,
     links: [
@@ -25,25 +25,25 @@ const demos = [
   },
   {
     id: "weaving",
-    title: "Weaving flow",
-    subtitle: "Grey fabric · PRO-7003 · Faisalabad plant",
+    title: "Lawn RTW flow",
+    subtitle: "Lawn RTW · PRO-7003 · SITE Karachi Plant",
     icon: Waves,
     steps: weavingWorkflow,
     links: [
-      { href: "/inventory", label: "Yarn stock" },
-      { href: "/production/orders/PRO-7003", label: "Weaving order" },
+      { href: "/inventory", label: "Lawn stock" },
+      { href: "/production/orders/PRO-7003", label: "Lawn RTW order" },
       { href: "/sales/orders/SO-1027", label: "Sales order" },
     ],
   },
   {
     id: "dyeing",
-    title: "Dyeing & finishing",
-    subtitle: "BT-DYE-441 · Navy reactive · shade CAPA",
+    title: "Ombre print & finishing",
+    subtitle: "BT-OMBRE-441 · Blush Ombre · shade CAPA",
     icon: Droplets,
     steps: dyeingWorkflow,
     links: [
-      { href: "/production/orders/PRO-7002", label: "Dyeing order" },
-      { href: "/procurement/orders/PO-4402", label: "Chemicals PO" },
+      { href: "/production/orders/PRO-7004", label: "Print + stitch order" },
+      { href: "/procurement/orders/PO-4402", label: "Ombre print PO" },
       { href: "/quality/inspections", label: "QC inspections" },
     ],
   },
@@ -56,7 +56,7 @@ export default function WorkflowsPage() {
     <div className="space-y-6">
       <PageHeader
         title="Demo workflows"
-        description="Three end-to-end textile journeys you can click through — order to cash, weaving, and dyeing."
+        description="Three end-to-end Cocoon journeys you can click through — order to cash, lawn RTW, and ombre print."
         breadcrumbs={[{ label: "Overview" }, { label: "Workflows" }]}
         actions={
           <Button
@@ -65,7 +65,7 @@ export default function WorkflowsPage() {
             onClick={() =>
               toast({
                 title: "Guided tour",
-                description: "Start with SO-1024 T-shirt workflow.",
+                description: "Start with SO-1024 Prism Kaftaan workflow.",
                 tone: "info",
               })
             }

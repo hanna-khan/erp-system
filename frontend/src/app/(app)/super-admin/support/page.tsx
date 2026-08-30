@@ -8,9 +8,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 
 const seed = [
-  { id: "TK-301", tenant: "ABC Textile Mills", subject: "MES tablet sync delay", priority: "High", status: "Open" },
+  { id: "TK-301", tenant: "Cocoon Clothing", subject: "MES tablet sync delay", priority: "High", status: "Open" },
   { id: "TK-302", tenant: "Sunrise Knits", subject: "Need extra QC users", priority: "Medium", status: "Open" },
-  { id: "TK-303", tenant: "Pearl Dyeing Works", subject: "Trial extension request", priority: "Low", status: "Pending" },
+  { id: "TK-303", tenant: "Desert Bloom Apparel", subject: "Trial extension request", priority: "Low", status: "Pending" },
 ];
 
 export default function SupportPage() {

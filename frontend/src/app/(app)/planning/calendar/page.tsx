@@ -10,12 +10,12 @@ import { cn } from "@/lib/utils";
 const days = ["Mon 25", "Tue 26", "Wed 27", "Thu 28", "Fri 29", "Sat 30", "Sun 31"];
 
 const events: { day: number; title: string; plant: string; tone: "info" | "success" | "warning" | "error"; span?: number }[] = [
-  { day: 0, title: "PRO-7001 Stitching", plant: "Lahore", tone: "info", span: 5 },
-  { day: 0, title: "PRO-7002 Dyeing", plant: "Faisalabad", tone: "warning", span: 4 },
-  { day: 2, title: "PO-4404 ETA Labels", plant: "Lahore", tone: "success", span: 1 },
-  { day: 3, title: "QC Final · Fabric", plant: "Faisalabad", tone: "error", span: 1 },
-  { day: 4, title: "PRO-7003 Weave start", plant: "Faisalabad", tone: "info", span: 3 },
-  { day: 5, title: "Maintenance Loom-002", plant: "Faisalabad", tone: "warning", span: 1 },
+  { day: 0, title: "PRO-7001 Stitching", plant: "SITE Karachi", tone: "info", span: 5 },
+  { day: 0, title: "PRO-7002 Stitching", plant: "SITE Karachi", tone: "warning", span: 4 },
+  { day: 2, title: "PO-4404 ETA Hang Tags", plant: "SITE Karachi", tone: "success", span: 1 },
+  { day: 3, title: "QC Final · Lawn", plant: "SITE Karachi", tone: "error", span: 1 },
+  { day: 4, title: "PRO-7003 Cut start", plant: "SITE Karachi", tone: "info", span: 3 },
+  { day: 5, title: "Maintenance Sewing Line-02", plant: "SITE Karachi", tone: "warning", span: 1 },
   { day: 1, title: "GRN Cotton", plant: "Karachi", tone: "success", span: 1 },
 ];
 

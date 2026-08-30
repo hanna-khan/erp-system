@@ -40,7 +40,7 @@ export default function CostingHubPage() {
       <KpiGrid
         columns={4}
         items={[
-          { id: "std", label: "Std cost · T-shirt", value: formatCurrency(costSheet.standard.total), tone: "info" },
+          { id: "std", label: "Std cost · Prism Kaftaan", value: formatCurrency(costSheet.standard.total), tone: "info" },
           { id: "act", label: "Actual cost", value: formatCurrency(costSheet.actual.total), tone: "warning" },
           {
             id: "var",

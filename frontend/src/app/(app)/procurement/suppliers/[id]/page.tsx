@@ -17,22 +17,22 @@ import { Star } from "lucide-react";
 
 const historyBySupplier: Record<string, { id: string; title: string; meta?: string; time: string }[]> = {
   "SU-501": [
-    { id: "1", title: "PO-4401 issued — Raw Cotton Grade A", meta: "50,000 KG · PKR 18.5M", time: "2026-08-26" },
-    { id: "2", title: "Incoming QC Pass · BT-CTN-882", meta: "QC-1201 · Nadia Sheikh", time: "2026-08-28" },
-    { id: "3", title: "Quality score updated to 94%", meta: "Micronaire & trash within spec", time: "2026-08-28" },
-    { id: "4", title: "On-time delivery confirmed", meta: "Lead time 6 days vs SLA 7", time: "2026-08-29" },
+    { id: "1", title: "PO-4401 issued — Printed Lawn Fabric (60\")", meta: "12,000 MTR · PKR 5.04M", time: "2026-08-26" },
+    { id: "2", title: "Incoming QC Pass · BT-LAWN-882", meta: "QC-1201 · Mehreen Qazi", time: "2026-08-28" },
+    { id: "3", title: "Quality score updated to 95%", meta: "GSM & print registration within spec", time: "2026-08-28" },
+    { id: "4", title: "On-time delivery confirmed", meta: "Lead time 9 days vs SLA 10", time: "2026-08-29" },
   ],
   "SU-502": [
-    { id: "1", title: "PO-4403 received — Cotton Yarn 30s", meta: "15,000 KG", time: "2026-08-22" },
-    { id: "2", title: "Minor shade variation noted", meta: "Accepted with concession", time: "2026-08-23" },
+    { id: "1", title: "PO-4403 received — Origin Embroidery Panels", meta: "2,000 PCS", time: "2026-08-22" },
+    { id: "2", title: "Embroidery QC notes logged", meta: "Accepted with concession", time: "2026-08-23" },
   ],
   "SU-503": [
-    { id: "1", title: "PO-4402 partial — Reactive Dye Navy", meta: "720 KG inbound", time: "2026-08-29" },
-    { id: "2", title: "Preferred vendor renewal", meta: "Quality score 97%", time: "2026-08-15" },
+    { id: "1", title: "PO-4402 partial — Ombre Print Job — Blush", meta: "3,500 MTR inbound", time: "2026-08-29" },
+    { id: "2", title: "Preferred vendor renewal", meta: "Quality score 93%", time: "2026-08-15" },
   ],
   "SU-504": [
-    { id: "1", title: "PO-4404 approved — Neck Labels + Tags", meta: "25,000 PCS · for PRO-7001", time: "2026-08-27" },
-    { id: "2", title: "Awaiting GRN at Lahore Plant", meta: "ETA 2026-09-08", time: "2026-08-30" },
+    { id: "1", title: "PO-4404 approved — Cocoon Hang Tags + Polybags", meta: "25,000 PCS · for PRO-7001", time: "2026-08-27" },
+    { id: "2", title: "Awaiting GRN at Karachi FG Warehouse", meta: "ETA 2026-09-08", time: "2026-08-30" },
   ],
 };
 

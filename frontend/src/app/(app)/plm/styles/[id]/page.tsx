@@ -14,13 +14,13 @@ import { useToast } from "@/hooks/use-toast";
 export default function StyleDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { toast } = useToast();
-  const styleId = id || "ST-BASIC-27";
+  const styleId = id || "CCN-KAFT-PRISM";
 
   return (
     <div className="animate-fade-in space-y-6">
       <PageHeader
         title={styleId}
-        description="Men's Basic Tee · SS27 · linked to SO-1024 / PRO-7001"
+        description="Prism Kaftaan 2-Piece · SS27 · linked to SO-1024 / PRO-7001"
         breadcrumbs={[{ label: "PLM", href: "/plm" }, { label: "Styles", href: "/plm/styles" }, { label: styleId }]}
         badge="Approved"
         actions={

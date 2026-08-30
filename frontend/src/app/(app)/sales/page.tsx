@@ -33,7 +33,7 @@ export default function SalesHubPage() {
     <div className="space-y-6">
       <PageHeader
         title="Sales"
-        description="From quotation to invoice for yarn, fabric, and garment programs."
+        description="From quotation to invoice for lawn and RTW wholesale programs."
         breadcrumbs={[{ label: "Commercial" }, { label: "Sales" }]}
         actions={
           <Button

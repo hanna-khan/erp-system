@@ -23,7 +23,7 @@ import { Check, Factory, FileCheck } from "lucide-react";
 const orderLifecycle: WorkflowStep[] = [
   { id: "draft", label: "Draft", status: "completed", meta: "Created" },
   { id: "approve", label: "Approved", status: "completed", meta: "CEO" },
-  { id: "mrp", label: "MRP", status: "completed", meta: "Shortage labels" },
+  { id: "mrp", label: "MRP", status: "completed", meta: "Shortage hang tags" },
   { id: "prod", label: "Production", status: "current", meta: "PRO-7001" },
   { id: "qc", label: "QC", status: "upcoming", meta: "Final" },
   { id: "dispatch", label: "Dispatch", status: "upcoming", meta: "DO" },
@@ -51,13 +51,13 @@ export default function SalesOrderDetailPage({
 
   const approvalSteps = rich
     ? [
-        { role: "Sales Manager", user: "Zainab Rizvi", status: "Approved", at: "2026-08-20 09:30" },
-        { role: "Finance", user: "Hassan Qureshi", status: "Approved", at: "2026-08-20 10:15" },
-        { role: "CEO", user: "Imran Malik", status: "Approved", at: "2026-08-20 11:05" },
+        { role: "Sales Manager", user: "Areeba Malik", status: "Approved", at: "2026-08-20 09:30" },
+        { role: "Senior Manager", user: "Nargis Imran", status: "Approved", at: "2026-08-20 10:15" },
+        { role: "CEO", user: "Salman Sabir", status: "Approved", at: "2026-08-20 11:05" },
       ]
     : [
-        { role: "Sales Manager", user: "Zainab Rizvi", status: so.status === "Approved" || so.status === "In Production" || so.status === "Delivered" || so.status === "Partial Delivery" ? "Approved" : "Pending", at: "—" },
-        { role: "Finance", user: "Hassan Qureshi", status: so.status === "Overdue" || so.status === "Draft" ? "Pending" : "Approved", at: "—" },
+        { role: "Sales Manager", user: "Areeba Malik", status: so.status === "Approved" || so.status === "In Production" || so.status === "Delivered" || so.status === "Partial Delivery" ? "Approved" : "Pending", at: "—" },
+        { role: "Senior Manager", user: "Nargis Imran", status: so.status === "Overdue" || so.status === "Draft" ? "Pending" : "Approved", at: "—" },
       ];
 
   return (
@@ -106,7 +106,7 @@ export default function SalesOrderDetailPage({
         <StatPill label="Plant" value={so.plant} />
       </div>
 
-      <WorkflowStepper steps={rich ? tshirtWorkflow : orderLifecycle} title={rich ? "End-to-end T-shirt workflow" : "Order lifecycle"} />
+      <WorkflowStepper steps={rich ? tshirtWorkflow : orderLifecycle} title={rich ? "End-to-end Prism Kaftaan workflow" : "Order lifecycle"} />
 
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="zr-card space-y-4 p-5 lg:col-span-2">
@@ -117,7 +117,7 @@ export default function SalesOrderDetailPage({
               ["Fabric / product", so.product],
               ["Colorway", so.color],
               ["GSM", String(so.gsm)],
-              ["Composition", rich ? "100% Cotton jersey" : "As per style"],
+              ["Composition", rich ? "Printed lawn · RTW" : "As per style"],
               ["Wash / finish", rich ? "Softener + silicone" : "Standard"],
               ["Packing", rich ? "1 pc polybag · 24/carton" : "Standard export"],
               ["Incoterms", rich ? "FOB Karachi" : so.customer.includes("Export") ? "CIF" : "Ex-Works"],

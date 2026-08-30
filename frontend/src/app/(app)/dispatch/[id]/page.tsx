@@ -33,7 +33,7 @@ const shipments: Record<
 > = {
   "SH-5501": {
     so: "SO-1025",
-    customer: "Export Customer B",
+    customer: "Gulf Style Trading (UAE)",
     mode: "Sea FCL",
     origin: "Port Qasim",
     destination: "Jebel Ali",
@@ -42,21 +42,21 @@ const shipments: Record<
     value: 5040000,
     status: "In Transit",
     container: "MSCU4829910",
-    product: "Dyed Fabric Reactive · Navy · 200 GSM",
+    product: "Fairy Meadows 2-Piece · Navy · 200 GSM",
     hsCode: "5208.52",
   },
   "SH-5502": {
     so: "SO-1026",
-    customer: "Nordic Apparel AS",
+    customer: "UK Desi Wear Ltd",
     mode: "Air",
     origin: "KHI",
-    destination: "OSL",
+    destination: "LHR",
     qty: 6000,
     unit: "PCS",
     value: 8700000,
     status: "Delivered",
     container: "AWB-99102",
-    product: "Polo Shirt · Assorted",
+    product: "Matcha | 2-Piece · Assorted",
     hsCode: "6105.10",
   },
 };
@@ -225,7 +225,7 @@ export default function DispatchDetailPage({ params }: { params: Promise<{ id: s
             <CardContent className="pt-6">
               <Timeline
                 events={[
-                  { id: "1", title: "Packing completed", time: "2026-08-26", meta: "Lahore / FSD FG" },
+                  { id: "1", title: "Packing completed", time: "2026-08-26", meta: "Karachi FG Warehouse" },
                   { id: "2", title: "Export docs approved", time: "2026-08-27", meta: "Commercial + packing" },
                   { id: "3", title: "Gate-out to port", time: "2026-08-28", meta: sh.container },
                   { id: "4", title: "Vessel departed", time: "2026-08-29", meta: sh.origin },

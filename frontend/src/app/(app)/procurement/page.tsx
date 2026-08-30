@@ -48,7 +48,7 @@ export default function ProcurementHubPage() {
     <div className="space-y-6">
       <PageHeader
         title="Procurement"
-        description="Source fiber, yarn, chemicals and accessories across plants with supplier scorecards and PO control."
+        description="Source lawn fabric, print jobs, embroidery and hang tags with supplier scorecards and PO control."
         breadcrumbs={[{ label: "Supply Chain" }, { label: "Procurement" }]}
         badge="Textile sourcing"
         actions={
@@ -66,7 +66,7 @@ export default function ProcurementHubPage() {
       <KpiGrid items={kpis} columns={4} />
 
       <WorkflowStepper
-        title="T-shirt program · sourcing chain"
+        title="Prism Kaftaan · sourcing chain"
         steps={tshirtWorkflow.slice(3, 7)}
       />
 

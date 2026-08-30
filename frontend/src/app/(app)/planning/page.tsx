@@ -37,7 +37,7 @@ export default function PlanningMpsPage() {
     <div className="space-y-6">
       <PageHeader
         title="Master Production Schedule"
-        description="Align sales demand with plant capacity for yarn, fabric and garments."
+        description="Align sales demand with plant capacity for lawn and RTW."
         breadcrumbs={[{ label: "Manufacturing" }, { label: "Planning" }]}
         badge="MPS"
         actions={
@@ -128,7 +128,7 @@ export default function PlanningMpsPage() {
             <CardTitle>Planning notes</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-sm text-[var(--muted)]">
-            <p>SO-1028 is overdue — recommend overtime on Lahore stitching or split lot.</p>
+            <p>SO-1028 is overdue — recommend overtime on SITE stitching or split lot.</p>
             <p>Fabric for SO-1025 dyeing is 62% complete; protect capacity on DYE-01.</p>
             <p>
               Labels shortage for PRO-7001 covered by{" "}

@@ -13,10 +13,10 @@ import { statusTone } from "@/mock/data";
 import { Plus } from "lucide-react";
 
 const ncrs = [
-  { id: "NCR-301", title: "Shade mismatch Navy reactive", source: "QC-1203", owner: "Nadia Sheikh", due: "2026-09-05", status: "Open", severity: "Critical", capa: "Rework dye lot / adjust recipe" },
-  { id: "NCR-302", title: "Skipped stitches on Line-01", source: "QC-1202", owner: "Ahmed Raza", due: "2026-09-02", status: "In Progress", severity: "Major", capa: "Needle change + operator coaching" },
-  { id: "NCR-303", title: "Label shortage impacting packing", source: "MRP", owner: "Omar Farooq", due: "2026-09-08", status: "Monitoring", severity: "Major", capa: "Expedite PO-4404" },
-  { id: "NCR-304", title: "Trash content near limit", source: "QC-1201", owner: "Lab KHI", due: "2026-08-30", status: "Closed", severity: "Minor", capa: "Supplier feedback logged" },
+  { id: "NCR-301", title: "Shade mismatch Blush Ombre", source: "QC-1203", owner: "Mehreen Qazi", due: "2026-09-05", status: "Open", severity: "Critical", capa: "Rework ombre print lot / adjust recipe" },
+  { id: "NCR-302", title: "Skipped stitches on Line-01", source: "QC-1202", owner: "Farhan Siddiqui", due: "2026-09-02", status: "In Progress", severity: "Major", capa: "Needle change + operator coaching" },
+  { id: "NCR-303", title: "Hang tag shortage impacting packing", source: "MRP", owner: "Asad Bukhari", due: "2026-09-08", status: "Monitoring", severity: "Major", capa: "Expedite PO-4404" },
+  { id: "NCR-304", title: "Lawn GSM variance near limit", source: "QC-1201", owner: "Lab SITE", due: "2026-08-30", status: "Closed", severity: "Minor", capa: "Supplier feedback logged" },
 ];
 
 export default function NcrPage() {
@@ -102,7 +102,7 @@ export default function NcrPage() {
             <Timeline
               events={[
                 { id: "1", title: "NCR opened from QC-1203", time: "2026-08-29", meta: "Shade ΔE 2.8" },
-                { id: "2", title: "Lot BT-DYE-441 held", time: "2026-08-29", meta: "Warehouse FSD" },
+                { id: "2", title: "Lot BT-OMBRE-441 held", time: "2026-08-29", meta: "Karachi WIP" },
                 { id: "3", title: "Recipe review scheduled", time: "2026-08-30", meta: "Dyeing lab" },
                 { id: "4", title: "Target close", time: "2026-09-05", meta: "Rework or downgrade" },
               ]}

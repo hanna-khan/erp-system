@@ -1,49 +1,94 @@
 "use client";
 
+import { useState } from "react";
 import { PageHeader } from "@/components/shared/page-header";
 import { DataTable } from "@/components/shared/data-table";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { leads, statusTone } from "@/mock/data";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, UserPlus } from "lucide-react";
+import { UserPlus } from "lucide-react";
 
-type LeadRow = (typeof leads)[number] & Record<string, unknown>;
+type LeadRow = {
+  id: string;
+  company: string;
+  contact: string;
+  source: string;
+  industry: string;
+  status: string;
+  owner: string;
+  value: number;
+  closeDate: string;
+} & Record<string, unknown>;
 
 export default function LeadsPage() {
   const { toast } = useToast();
+  const [rows, setRows] = useState<LeadRow[]>(leads as LeadRow[]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 zr-section">
       <PageHeader
         title="Leads"
-        description="Capture and qualify domestic & export textile inquiries."
+        description="People or companies interested in buying from you. Qualify them, then convert to opportunities."
         breadcrumbs={[
           { label: "CRM", href: "/crm" },
           { label: "Leads" },
         ]}
         actions={
-          <Button
-            size="sm"
-            onClick={() =>
-              toast({
-                title: "New lead",
-                description: "Lead capture form would open here.",
-                tone: "info",
-              })
-            }
-          >
-            <Plus className="size-3.5" /> Add lead
-          </Button>
+          <CreateRecordDialog
+            triggerLabel="Add lead"
+            title="Capture new lead"
+            description="Example: a boutique wants lawn / RTW wholesale prices."
+            successTitle="Lead added"
+            fields={[
+              { name: "company", label: "Company", placeholder: "USA South Asian Boutique", defaultValue: "New Prospect Co." },
+              { name: "contact", label: "Contact person", placeholder: "Ali Rehman", defaultValue: "New Contact" },
+              {
+                name: "source",
+                label: "Source",
+                type: "select",
+                options: ["Exhibition", "Referral", "Website", "Cold call", "WhatsApp"],
+                defaultValue: "Website",
+              },
+              {
+                name: "industry",
+                label: "Industry",
+                type: "select",
+                options: ["Garments", "Retail", "Denim", "Modest fashion", "Export"],
+                defaultValue: "Garments",
+              },
+              { name: "value", label: "Expected value (PKR)", type: "number", defaultValue: "2000000" },
+              { name: "closeDate", label: "Target close", type: "date", defaultValue: "2026-10-15" },
+            ]}
+            onCreate={(values) => {
+              setRows((prev) => [
+                {
+                  id: `LD-${2200 + prev.length + 1}`,
+                  company: values.company,
+                  contact: values.contact,
+                  source: values.source,
+                  industry: values.industry,
+                  status: "New",
+                  owner: "Areeba Malik",
+                  value: Number(values.value) || 0,
+                  closeDate: values.closeDate,
+                },
+                ...prev,
+              ]);
+            }}
+          />
         }
       />
 
       <DataTable<LeadRow>
-        data={leads as LeadRow[]}
+        data={rows}
         searchKeys={["id", "company", "contact", "source", "owner", "status"]}
         searchPlaceholder="Search leads, companies, owners…"
         statusKey="status"
+        filterKey="status"
+        exportName="leads"
         columns={[
           { key: "id", label: "Lead ID" },
           { key: "company", label: "Company" },
@@ -59,22 +104,23 @@ export default function LeadsPage() {
           {
             key: "value",
             label: "Est. value",
-            render: (row) => formatCurrency(row.value),
+            render: (row) => formatCurrency(Number(row.value)),
           },
           {
             key: "closeDate",
             label: "Target close",
-            render: (row) => formatDate(row.closeDate),
+            render: (row) => formatDate(String(row.closeDate)),
           },
         ]}
         actions={
           <Button
             size="sm"
             variant="secondary"
+            className="rounded-xl"
             onClick={() =>
               toast({
-                title: "Converted",
-                description: "Selected leads would convert to opportunities.",
+                title: "Lead converted",
+                description: "Moved to Opportunities as a draft deal.",
                 tone: "success",
               })
             }

@@ -12,12 +12,12 @@ import { formatNumber } from "@/lib/utils";
 import { Plus } from "lucide-react";
 
 const batches = [
-  { id: "BT-CTN-882", item: "Raw Cotton Grade A", sku: "RM-CTN-A", qty: 50000, unit: "KG", plant: "Karachi Plant", status: "Released", qc: "Pass", expiry: "—", linked: "PO-4401" },
-  { id: "BT-DYE-441", item: "Dyed Fabric Reactive Navy", sku: "FAB-DYE-200", qty: 12000, unit: "MTR", plant: "Faisalabad Plant", status: "Hold", qc: "Fail", expiry: "—", linked: "PRO-7002" },
-  { id: "BT-TS-1024", item: "Men's T-Shirt", sku: "GAR-TSH-MENS", qty: 4200, unit: "PCS", plant: "Lahore Plant", status: "WIP", qc: "Conditional", expiry: "—", linked: "PRO-7001" },
-  { id: "BT-YRN-771", item: "Cotton Yarn 30s", sku: "YRN-CTN-30S", qty: 15000, unit: "KG", plant: "Faisalabad Plant", status: "Released", qc: "Pass", expiry: "—", linked: "PO-4403" },
-  { id: "BT-PO-990", item: "Polo Shirt", sku: "GAR-POL-MENS", qty: 6000, unit: "PCS", plant: "Lahore Plant", status: "Closed", qc: "Pass", expiry: "—", linked: "SO-1026" },
-  { id: "BT-CHM-220", item: "Reactive Dye Navy", sku: "CHM-DYE-NVY", qty: 720, unit: "KG", plant: "Faisalabad Plant", status: "Released", qc: "Pass", expiry: "2027-02-01", linked: "GRN-8802" },
+  { id: "BT-LAWN-882", item: "Printed Lawn Fabric (60\")", sku: "FAB-LAWN-60", qty: 18500, unit: "MTR", plant: "SITE Karachi Plant", status: "Released", qc: "Pass", expiry: "—", linked: "PO-4401" },
+  { id: "BT-OMBRE-441", item: "Blush Ombre Fabric", sku: "FAB-OMBRE-BLUSH", qty: 2400, unit: "MTR", plant: "SITE Karachi Plant", status: "Hold", qc: "Fail", expiry: "—", linked: "PRO-7004" },
+  { id: "BT-PK-1024", item: "Prism Kaftaan 2-Piece", sku: "CCN-KAFT-PRISM", qty: 4200, unit: "PCS", plant: "Karachi FG Warehouse", status: "WIP", qc: "Conditional", expiry: "—", linked: "PRO-7001" },
+  { id: "BT-EMB-771", item: "Origin Embroidery Panels", sku: "ACC-EMB-ORIGIN", qty: 2000, unit: "PCS", plant: "SITE Karachi Plant", status: "Released", qc: "Pass", expiry: "—", linked: "PO-4403" },
+  { id: "BT-MT-990", item: "Matcha | 2-Piece", sku: "CCN-RTW-MATCHA", qty: 1200, unit: "PCS", plant: "Online Fulfillment Hub", status: "Closed", qc: "Pass", expiry: "—", linked: "SO-1026" },
+  { id: "BT-OMBRE-220", item: "Ombre Print Job — Blush", sku: "FAB-OMBRE-BLUSH", qty: 3500, unit: "MTR", plant: "SITE Karachi Plant", status: "Released", qc: "Pass", expiry: "—", linked: "GRN-8802" },
 ];
 
 export default function BatchesPage() {
@@ -27,7 +27,7 @@ export default function BatchesPage() {
     <div className="space-y-6">
       <PageHeader
         title="Batches & Lots"
-        description="Traceability for fiber, yarn, dye lots and garment production batches."
+        description="Traceability for lawn, ombre print lots and garment production batches."
         breadcrumbs={[
           { label: "Inventory", href: "/inventory" },
           { label: "Batches & Lots" },

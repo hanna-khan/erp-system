@@ -20,7 +20,7 @@ export default function QualityHubPage() {
     <div className="space-y-6">
       <PageHeader
         title="Quality Control"
-        description="Incoming, in-process and final inspections for yarn, fabric and garments."
+        description="Incoming, in-process and final inspections for lawn fabric and RTW garments."
         breadcrumbs={[{ label: "Manufacturing" }, { label: "Quality" }]}
         badge="QC"
         actions={
@@ -105,11 +105,11 @@ export default function QualityHubPage() {
           <CardContent className="space-y-3 text-sm">
             <Link href="/quality/inspections/QC-1203" className="block rounded-xl border border-rose-100 bg-rose-50/50 p-3 hover:bg-rose-50">
               <p className="font-medium text-rose-800">QC-1203 failed shade match</p>
-              <p className="mt-1 text-xs text-rose-700/80">Dyed Fabric · BT-DYE-441 · open NCR</p>
+              <p className="mt-1 text-xs text-rose-700/80">Blush Ombre · BT-OMBRE-441 · open NCR</p>
             </Link>
             <Link href="/quality/inspections/QC-1202" className="block rounded-xl border border-amber-100 bg-amber-50/50 p-3 hover:bg-amber-50">
               <p className="font-medium text-amber-900">QC-1202 conditional</p>
-              <p className="mt-1 text-xs text-amber-800/80">T-shirt stitching · 42 defects · CAPA review</p>
+              <p className="mt-1 text-xs text-amber-800/80">Prism Kaftaan stitching · 42 defects · CAPA review</p>
             </Link>
             <Link href="/quality/fabric">
               <Button variant="outline" size="sm" className="w-full">

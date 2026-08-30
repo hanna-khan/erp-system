@@ -9,16 +9,17 @@ export function KpiCard({ kpi }: { kpi: KpiCardType }) {
     kpi.trend === "up" ? ArrowUpRight : kpi.trend === "down" ? ArrowDownRight : Minus;
 
   return (
-    <div className="zr-card p-4 transition-shadow hover:shadow-[var(--shadow-sm)]">
-      <p className="zr-label">{kpi.label}</p>
-      <div className="mt-2 flex items-end justify-between gap-2">
-        <p className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
+    <div className="zr-card group relative overflow-hidden p-4">
+      <div className="pointer-events-none absolute -right-6 -top-6 size-20 rounded-full bg-[var(--brand-primary-soft)] opacity-60 transition-transform group-hover:scale-110" />
+      <p className="zr-label relative">{kpi.label}</p>
+      <div className="relative mt-2.5 flex items-end justify-between gap-2">
+        <p className="text-[1.65rem] font-semibold tracking-tight text-[var(--foreground)]">
           {kpi.value}
         </p>
         {kpi.change ? (
           <span
             className={cn(
-              "inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 text-[11px] font-semibold",
+              "inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-[11px] font-semibold",
               kpi.trend === "up" && "bg-emerald-50 text-emerald-600",
               kpi.trend === "down" && "bg-rose-50 text-rose-600",
               (!kpi.trend || kpi.trend === "neutral") && "bg-slate-50 text-slate-500",
@@ -29,7 +30,7 @@ export function KpiCard({ kpi }: { kpi: KpiCardType }) {
           </span>
         ) : null}
       </div>
-      {kpi.hint ? <p className="mt-1 text-xs text-[var(--muted)]">{kpi.hint}</p> : null}
+      {kpi.hint ? <p className="relative mt-1.5 text-xs text-[var(--muted)]">{kpi.hint}</p> : null}
     </div>
   );
 }
@@ -47,7 +48,7 @@ export function KpiGrid({ items, columns = 3 }: { items: KpiCardType[]; columns?
             : "sm:grid-cols-2 xl:grid-cols-3";
 
   return (
-    <div className={cn("grid gap-3", colClass)}>
+    <div className={cn("grid gap-3.5", colClass)}>
       {items.map((kpi) => (
         <KpiCard key={kpi.id} kpi={kpi} />
       ))}
@@ -67,11 +68,11 @@ export function StatPill({
   return (
     <div
       className={cn(
-        "rounded-xl border px-3 py-2",
-        tone === "success" && "border-emerald-100 bg-emerald-50/60",
-        tone === "warning" && "border-amber-100 bg-amber-50/60",
-        tone === "error" && "border-rose-100 bg-rose-50/60",
-        tone === "info" && "border-sky-100 bg-sky-50/60",
+        "rounded-2xl border px-3.5 py-2.5 shadow-[var(--shadow-xs)]",
+        tone === "success" && "border-emerald-100 bg-emerald-50/70",
+        tone === "warning" && "border-amber-100 bg-amber-50/70",
+        tone === "error" && "border-rose-100 bg-rose-50/70",
+        tone === "info" && "border-sky-100 bg-sky-50/70",
         tone === "default" && "border-[var(--border)] bg-[var(--surface)]",
       )}
     >

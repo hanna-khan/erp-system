@@ -13,9 +13,9 @@ import { Check, X } from "lucide-react";
 
 const seed = [
   { id: "AP-901", type: "Purchase Order", ref: "PO-4404", requester: "Omar Farooq", amount: 875000, status: "Pending", href: "/procurement/orders/PO-4404" },
-  { id: "AP-902", type: "Sales Discount", ref: "SO-1024", requester: "Zainab Rizvi", amount: 450000, status: "Pending", href: "/sales/orders/SO-1024" },
+  { id: "AP-902", type: "Sales Discount", ref: "SO-1024", requester: "Areeba Malik", amount: 450000, status: "Pending", href: "/sales/orders/SO-1024" },
   { id: "AP-903", type: "Leave", ref: "EMP-1005", requester: "Tariq Mehmood", amount: 0, status: "Pending", href: "/hr/employees/EMP-1005" },
-  { id: "AP-904", type: "Journal", ref: "JV-2405", requester: "Hassan Qureshi", amount: 1800000, status: "Pending", href: "/finance/gl" },
+  { id: "AP-904", type: "Journal", ref: "JV-2405", requester: "Waqas Anwar", amount: 1800000, status: "Pending", href: "/finance/gl" },
 ];
 
 export default function ApprovalsPage() {

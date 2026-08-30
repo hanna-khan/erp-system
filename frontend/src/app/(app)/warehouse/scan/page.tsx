@@ -99,7 +99,7 @@ export default function WarehouseScanPage() {
                 id="scan"
                 autoFocus
                 value={code}
-                placeholder="e.g. 89010010005 or GAR-TSH-MENS"
+                placeholder="e.g. 89010010005 or CCN-KAFT-PRISM"
                 onChange={(e) => setCode(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") runScan();
@@ -113,7 +113,7 @@ export default function WarehouseScanPage() {
             <div>
               <p className="zr-label mb-2">Quick demos</p>
               <div className="flex flex-wrap gap-2">
-                {["89010010005", "ACC-LABEL", "CHM-DYE-NVY", "89010010004"].map((demo) => (
+                {["89010010005", "ACC-TAG-CCN", "CHM-OMBRE-BLUSH", "89010010004"].map((demo) => (
                   <Button
                     key={demo}
                     size="sm"

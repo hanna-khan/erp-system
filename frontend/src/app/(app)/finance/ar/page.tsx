@@ -12,10 +12,10 @@ import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
 
 const invoices = [
-  { id: "INV-5501", customer: "Nordic Apparel AS", date: "2026-08-20", due: "2026-09-19", amount: 8700000, paid: 8700000, status: "Paid", so: "SO-1026" },
-  { id: "INV-5502", customer: "Export Customer B", date: "2026-08-28", due: "2026-09-27", amount: 5040000, paid: 0, status: "Open", so: "SO-1025" },
-  { id: "INV-5503", customer: "Fashion Retailer A", date: "2026-08-01", due: "2026-08-18", amount: 8450000, paid: 0, status: "Overdue", so: "SO-1024" },
-  { id: "INV-5504", customer: "Local Distributor C", date: "2026-08-15", due: "2026-09-14", amount: 2100000, paid: 800000, status: "Partial", so: "SO-1027" },
+  { id: "INV-5501", customer: "UK Desi Wear Ltd", date: "2026-08-20", due: "2026-09-19", amount: 8700000, paid: 8700000, status: "Paid", so: "SO-1026" },
+  { id: "INV-5502", customer: "Gulf Style Trading (UAE)", date: "2026-08-28", due: "2026-09-27", amount: 5040000, paid: 0, status: "Open", so: "SO-1025" },
+  { id: "INV-5503", customer: "Boutique Collective PK", date: "2026-08-01", due: "2026-08-18", amount: 8450000, paid: 0, status: "Overdue", so: "SO-1024" },
+  { id: "INV-5504", customer: "cocoon.pk Retail Customers", date: "2026-08-15", due: "2026-09-14", amount: 2100000, paid: 800000, status: "Partial", so: "SO-1027" },
 ];
 
 type InvRow = (typeof invoices)[number] & Record<string, unknown>;

@@ -1,56 +1,106 @@
 "use client";
 
+import { useState } from "react";
 import { PageHeader } from "@/components/shared/page-header";
 import { DataTable } from "@/components/shared/data-table";
 import { StatPill } from "@/components/shared/kpi";
-import { Button } from "@/components/ui/button";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrency, formatDate, formatPercent } from "@/lib/utils";
 import { opportunities, statusTone } from "@/mock/data";
-import { useToast } from "@/hooks/use-toast";
-import { Plus } from "lucide-react";
 
-type OppRow = (typeof opportunities)[number] & Record<string, unknown>;
+type OppRow = {
+  id: string;
+  name: string;
+  customer: string;
+  stage: string;
+  probability: number;
+  revenue: number;
+  closeDate: string;
+} & Record<string, unknown>;
 
 const stages = ["Qualification", "Proposal", "Negotiation", "Won", "Lost"];
 
 export default function OpportunitiesPage() {
-  const { toast } = useToast();
+  const [rows, setRows] = useState<OppRow[]>(opportunities as OppRow[]);
 
   const byStage = stages.map((stage) => ({
     stage,
-    count: opportunities.filter((o) => o.stage === stage).length,
-    value: opportunities.filter((o) => o.stage === stage).reduce((s, o) => s + o.revenue, 0),
+    count: rows.filter((o) => o.stage === stage).length,
+    value: rows.filter((o) => o.stage === stage).reduce((s, o) => s + Number(o.revenue), 0),
   }));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 zr-section">
       <PageHeader
         title="Opportunities"
-        description="Textile program pipeline — styles, fabric contracts, and garment bulk orders."
+        description="Your sales pipeline — deals that can become real orders. Click New opportunity to add one."
         breadcrumbs={[
           { label: "CRM", href: "/crm" },
           { label: "Opportunities" },
         ]}
         actions={
-          <Button
-            size="sm"
-            onClick={() =>
-              toast({ title: "Opportunity created", description: "Draft opportunity saved.", tone: "success" })
-            }
-          >
-            <Plus className="size-3.5" /> New opportunity
-          </Button>
+          <CreateRecordDialog
+            triggerLabel="New opportunity"
+            title="Create opportunity"
+            description="Add a potential deal. Example: a customer wants 10,000 Prism Kaftaan sets."
+            successTitle="Opportunity created"
+            fields={[
+              { name: "name", label: "Opportunity name", placeholder: "Lawn 2026 Wholesale Drop", defaultValue: "New RTW / lawn program" },
+              {
+                name: "customer",
+                label: "Customer",
+                type: "select",
+                options: ["Boutique Collective PK", "Gulf Style Trading (UAE)", "cocoon.pk Retail Customers", "UK Desi Wear Ltd"],
+                defaultValue: "Boutique Collective PK",
+              },
+              {
+                name: "stage",
+                label: "Stage",
+                type: "select",
+                options: stages,
+                defaultValue: "Qualification",
+              },
+              { name: "probability", label: "Win probability %", type: "number", defaultValue: "40" },
+              { name: "revenue", label: "Expected revenue (PKR)", type: "number", defaultValue: "5000000" },
+              { name: "closeDate", label: "Expected close date", type: "date", defaultValue: "2026-09-30" },
+            ]}
+            onCreate={(values) => {
+              const id = `OP-${3100 + rows.length + 1}`;
+              setRows((prev) => [
+                {
+                  id,
+                  name: values.name,
+                  customer: values.customer,
+                  stage: values.stage,
+                  probability: Number(values.probability) || 0,
+                  revenue: Number(values.revenue) || 0,
+                  closeDate: values.closeDate,
+                },
+                ...prev,
+              ]);
+            }}
+          />
         }
       />
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
         {byStage.map((s) => (
-          <div key={s.stage} className="zr-card p-4">
+          <button
+            key={s.stage}
+            type="button"
+            className="zr-card p-4 text-left hover:border-[var(--brand-primary)]"
+            onClick={() => {
+              /* visual cue — filter via table status chips */
+              document
+                .querySelector<HTMLButtonElement>("button:has(.lucide-filter), button")
+                ?.blur();
+            }}
+          >
             <p className="zr-label">{s.stage}</p>
             <p className="mt-2 text-xl font-semibold">{s.count}</p>
             <p className="mt-1 text-xs text-[var(--muted)]">{formatCurrency(s.value)}</p>
-          </div>
+          </button>
         ))}
       </div>
 
@@ -58,22 +108,26 @@ export default function OpportunitiesPage() {
         <StatPill
           label="Weighted pipeline"
           value={formatCurrency(
-            opportunities.reduce((s, o) => s + (o.revenue * o.probability) / 100, 0),
+            rows.reduce((s, o) => s + (Number(o.revenue) * Number(o.probability)) / 100, 0),
           )}
           tone="info"
         />
         <StatPill
           label="Won this month"
-          value={formatCurrency(opportunities.filter((o) => o.stage === "Won").reduce((s, o) => s + o.revenue, 0))}
+          value={formatCurrency(
+            rows.filter((o) => o.stage === "Won").reduce((s, o) => s + Number(o.revenue), 0),
+          )}
           tone="success"
         />
       </div>
 
       <DataTable<OppRow>
-        data={opportunities as OppRow[]}
+        data={rows}
         searchKeys={["id", "name", "customer", "stage"]}
         searchPlaceholder="Search opportunities…"
         statusKey="stage"
+        filterKey="stage"
+        exportName="opportunities"
         columns={[
           { key: "id", label: "ID" },
           { key: "name", label: "Opportunity" },
@@ -85,18 +139,18 @@ export default function OpportunitiesPage() {
           },
           {
             key: "probability",
-            label: "Win %",
-            render: (row) => formatPercent(row.probability, 0),
+            label: "Probability",
+            render: (row) => formatPercent(Number(row.probability)),
           },
           {
             key: "revenue",
-            label: "Revenue",
-            render: (row) => formatCurrency(row.revenue),
+            label: "Expected revenue",
+            render: (row) => formatCurrency(Number(row.revenue)),
           },
           {
             key: "closeDate",
             label: "Close date",
-            render: (row) => formatDate(row.closeDate),
+            render: (row) => formatDate(String(row.closeDate)),
           },
         ]}
       />

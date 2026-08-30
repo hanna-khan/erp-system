@@ -9,7 +9,7 @@ import { formatCurrency } from "@/lib/utils";
 import { Building2, CreditCard, Headphones, Layers } from "lucide-react";
 
 const links = [
-  { href: "/super-admin/tenants", title: "Tenants", desc: "Multi-tenant textile mills on the platform.", icon: Building2 },
+  { href: "/super-admin/tenants", title: "Tenants", desc: "Multi-tenant apparel brands on the platform.", icon: Building2 },
   { href: "/super-admin/subscriptions", title: "Subscriptions", desc: "Plans, limits and module packs.", icon: Layers },
   { href: "/super-admin/billing", title: "Billing", desc: "MRR, invoices and past-due tenants.", icon: CreditCard },
   { href: "/super-admin/support", title: "Support", desc: "Tickets from tenant admins.", icon: Headphones },

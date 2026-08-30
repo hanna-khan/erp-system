@@ -8,10 +8,10 @@ import { useToast } from "@/hooks/use-toast";
 import { formatNumber, formatPercent } from "@/lib/utils";
 
 const capacityRows = [
-  { center: "SEW-LINE-01", plant: "Lahore", planned: 10000, available: 9600, actual: 4200, uom: "pcs", load: 104 },
-  { center: "CUT-LINE-01", plant: "Lahore", planned: 10000, available: 12000, actual: 10000, uom: "pcs", load: 83 },
-  { center: "DYE-01", plant: "Faisalabad", planned: 45000, available: 42000, actual: 28000, uom: "mtr", load: 107 },
-  { center: "Loom bay", plant: "Faisalabad", planned: 25000, available: 30000, actual: 0, uom: "mtr", load: 83 },
+  { center: "SEW-LINE-01", plant: "SITE Karachi", planned: 10000, available: 9600, actual: 4200, uom: "pcs", load: 104 },
+  { center: "CUT-LINE-01", plant: "SITE Karachi", planned: 10000, available: 12000, actual: 10000, uom: "pcs", load: 83 },
+  { center: "PRINT-01", plant: "SITE Karachi", planned: 45000, available: 42000, actual: 28000, uom: "mtr", load: 107 },
+  { center: "CUT bay", plant: "SITE Karachi", planned: 25000, available: 30000, actual: 0, uom: "mtr", load: 83 },
   { center: "Spinning", plant: "Karachi", planned: 0, available: 35000, actual: 30000, uom: "kg", load: 0 },
 ];
 

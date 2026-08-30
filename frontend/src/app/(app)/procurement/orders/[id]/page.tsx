@@ -63,7 +63,7 @@ export default function PurchaseOrderDetailPage({ params }: { params: Promise<{ 
   ];
 
   const lines = [
-    { sku: po.item.includes("Cotton") ? "RM-CTN-A" : po.item.includes("Dye") ? "CHM-DYE-NVY" : po.item.includes("Yarn") ? "YRN-CTN-30S" : "ACC-LABEL", desc: po.item, qty: po.qty, unit: po.unit, rate: Math.round(po.value / po.qty), received: Math.round((po.qty * receivedPct) / 100) },
+    { sku: po.item.includes("Lawn") ? "FAB-LAWN-60" : po.item.includes("Ombre") || po.item.includes("Print") ? "FAB-OMBRE-BLUSH" : po.item.includes("Embroidery") ? "ACC-EMB-ORIGIN" : "ACC-TAG-CCN", desc: po.item, qty: po.qty, unit: po.unit, rate: Math.round(po.value / po.qty), received: Math.round((po.qty * receivedPct) / 100) },
   ];
 
   return (
@@ -205,7 +205,7 @@ export default function PurchaseOrderDetailPage({ params }: { params: Promise<{ 
               <Timeline
                 events={[
                   { id: "1", title: "PO created from requisition", time: "2026-08-25 10:12", meta: "Omar Farooq" },
-                  { id: "2", title: "Approved by Finance", time: "2026-08-25 14:40", meta: "Hassan Qureshi" },
+                  { id: "2", title: "Approved by Finance", time: "2026-08-25 14:40", meta: "Waqas Anwar" },
                   { id: "3", title: "Issued to supplier", time: "2026-08-26 09:05", meta: po.supplier },
                   {
                     id: "4",

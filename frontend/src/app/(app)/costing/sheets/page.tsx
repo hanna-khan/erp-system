@@ -23,9 +23,9 @@ const sheets = [
     revised: "2026-08-29",
   },
   {
-    id: "CS-POLO-26",
-    product: "Polo Shirt",
-    style: "POLO-CORE-26",
+    id: "CS-MATCHA-26",
+    product: "Matcha | 2-Piece",
+    style: "CCN-RTW-MATCHA",
     process: "Garments",
     standard: 1120,
     actual: 1095,
@@ -35,8 +35,8 @@ const sheets = [
   },
   {
     id: "CS-DF-58",
-    product: "Dyed Fabric Reactive",
-    style: "DF-REAC-58",
+    product: "Fairy Meadows 2-Piece",
+    style: "CCN-LAWN-FAIRY",
     process: "Dyeing",
     standard: 385,
     actual: 412,
@@ -45,10 +45,10 @@ const sheets = [
     revised: "2026-08-28",
   },
   {
-    id: "CS-GREY-180",
-    product: "Cotton Fabric 180 GSM",
-    style: "GREY-180",
-    process: "Weaving",
+    id: "CS-LAWN-60",
+    product: "Printed Lawn Fabric (60\")",
+    style: "LAWN-60",
+    process: "Cutting / Stitch",
     standard: 265,
     actual: 258,
     variance: -7,
@@ -74,7 +74,7 @@ export default function CostSheetsPage() {
             onClick={() =>
               toast({
                 title: "Cost sheet created",
-                description: "CS-TS-28 draft from BOM TS-BASIC-27.",
+                description: "CS-TS-28 draft from BOM CCN-KAFT-PRISM.",
                 tone: "success",
               })
             }

@@ -9,9 +9,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Download, FileStack } from "lucide-react";
 
 const packs = [
-  { id: "TP-2701", style: "ST-BASIC-27", rev: "R3", pages: 12, status: "Released" },
-  { id: "TP-2608", style: "ST-POLO-26", rev: "R1", pages: 9, status: "Draft" },
-  { id: "TP-5802", style: "ST-DF-58", rev: "R2", pages: 6, status: "Released" },
+  { id: "TP-2701", style: "CCN-KAFT-PRISM", rev: "R3", pages: 12, status: "Released" },
+  { id: "TP-2608", style: "CCN-RTW-MATCHA", rev: "R1", pages: 9, status: "Draft" },
+  { id: "TP-5802", style: "CCN-LAWN-FAIRY", rev: "R2", pages: 6, status: "Released" },
 ];
 
 export default function TechpacksPage() {

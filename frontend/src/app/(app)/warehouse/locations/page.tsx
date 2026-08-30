@@ -12,19 +12,19 @@ import { formatNumber } from "@/lib/utils";
 import { Plus } from "lucide-react";
 
 const locations = [
-  { id: "KHI-RM-01", warehouse: "Karachi RM", zone: "Fiber", rack: "A-01", bin: "B1", sku: "RM-CTN-A", qty: 62400, capacity: 80000, status: "OK" },
-  { id: "FSD-RM-02", warehouse: "Faisalabad RM", zone: "Yarn", rack: "Y-04", bin: "C3", sku: "YRN-CTN-30S", qty: 84200, capacity: 100000, status: "OK" },
-  { id: "FSD-WIP-01", warehouse: "Faisalabad WIP", zone: "Grey", rack: "G-02", bin: "A4", sku: "FAB-GREY-180", qty: 38500, capacity: 50000, status: "OK" },
-  { id: "FSD-CHM-01", warehouse: "Faisalabad Chem", zone: "Dyes", rack: "D-01", bin: "A-02-B", sku: "CHM-DYE-NVY", qty: 480, capacity: 2000, status: "Low" },
-  { id: "LHR-FG-01", warehouse: "Lahore FG", zone: "Garments", rack: "F-08", bin: "R2", sku: "GAR-TSH-MENS", qty: 28400, capacity: 60000, status: "OK" },
-  { id: "LHR-ACC-01", warehouse: "Lahore Acc", zone: "Trims", rack: "T-03", bin: "A11", sku: "ACC-LABEL", qty: 1250, capacity: 20000, status: "Critical" },
+  { id: "KHI-RM-01", warehouse: "Karachi RM", zone: "Lawn", rack: "L-01", bin: "B1", sku: "FAB-LAWN-60", qty: 18500, capacity: 30000, status: "OK" },
+  { id: "KHI-RM-02", warehouse: "Karachi RM", zone: "Lawn", rack: "L-04", bin: "C3", sku: "FAB-LAWN-60", qty: 8200, capacity: 15000, status: "OK" },
+  { id: "KHI-WIP-01", warehouse: "Karachi WIP", zone: "Print WIP", rack: "G-02", bin: "A4", sku: "FAB-OMBRE-BLUSH", qty: 2400, capacity: 8000, status: "OK" },
+  { id: "KHI-CHM-01", warehouse: "Karachi Chem", zone: "Print chemicals", rack: "D-01", bin: "A-02-B", sku: "CHM-OMBRE-BLUSH", qty: 480, capacity: 2000, status: "Low" },
+  { id: "KHI-FG-01", warehouse: "Karachi FG", zone: "Garments", rack: "F-08", bin: "R2", sku: "CCN-KAFT-PRISM", qty: 840, capacity: 5000, status: "OK" },
+  { id: "KHI-ACC-01", warehouse: "Karachi Acc", zone: "Trims", rack: "T-03", bin: "A11", sku: "ACC-TAG-CCN", qty: 1850, capacity: 20000, status: "Critical" },
 ];
 
 const zoneSummary = [
-  { zone: "Fiber", bins: 24, utilization: 78 },
-  { zone: "Yarn", bins: 18, utilization: 84 },
-  { zone: "Grey / WIP", bins: 32, utilization: 71 },
-  { zone: "Chemicals", bins: 12, utilization: 55 },
+  { zone: "Lawn", bins: 24, utilization: 78 },
+  { zone: "Print WIP", bins: 18, utilization: 84 },
+  { zone: "Cutting / Stitch WIP", bins: 32, utilization: 71 },
+  { zone: "Print chemicals", bins: 12, utilization: 55 },
   { zone: "Garments FG", bins: 40, utilization: 64 },
   { zone: "Accessories", bins: 16, utilization: 42 },
 ];
@@ -46,7 +46,7 @@ export default function WarehouseLocationsPage() {
             onClick={() =>
               toast({
                 title: "Bin created",
-                description: "LHR-FG F-09 / R3 added.",
+                description: "KHI-FG F-09 / R3 added.",
                 tone: "success",
               })
             }

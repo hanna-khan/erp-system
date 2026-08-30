@@ -1,45 +1,86 @@
 "use client";
 
+import { useState } from "react";
 import { PageHeader } from "@/components/shared/page-header";
 import { DataTable } from "@/components/shared/data-table";
-import { Button } from "@/components/ui/button";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrency } from "@/lib/utils";
 import { customers, statusTone } from "@/mock/data";
-import { useToast } from "@/hooks/use-toast";
-import { Plus } from "lucide-react";
 
-type CustomerRow = (typeof customers)[number] & Record<string, unknown>;
+type CustomerRow = {
+  id: string;
+  name: string;
+  type: string;
+  city: string;
+  outstanding: number;
+  orders: number;
+  status: string;
+  contact: string;
+  phone: string;
+  email: string;
+} & Record<string, unknown>;
 
 export default function CustomersPage() {
-  const { toast } = useToast();
+  const [rows, setRows] = useState<CustomerRow[]>(customers as CustomerRow[]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 zr-section">
       <PageHeader
         title="Customers"
-        description="Domestic distributors and export apparel brands buying yarn, fabric, and garments."
+        description="Domestic boutiques and export buyers of Cocoon lawn and RTW."
         breadcrumbs={[
           { label: "CRM", href: "/crm" },
           { label: "Customers" },
         ]}
         actions={
-          <Button
-            size="sm"
-            onClick={() =>
-              toast({ title: "Customer form", description: "New customer wizard opened.", tone: "info" })
-            }
-          >
-            <Plus className="size-3.5" /> Add customer
-          </Button>
+          <CreateRecordDialog
+            triggerLabel="Add customer"
+            title="Create customer"
+            description="Example: a Lahore boutique buying Prism Kaftaan and Fairy Meadows lawn."
+            successTitle="Customer created"
+            fields={[
+              { name: "name", label: "Customer name", placeholder: "USA South Asian Boutique", defaultValue: "New Apparel Buyer" },
+              {
+                name: "type",
+                label: "Type",
+                type: "select",
+                options: ["Domestic", "Export"],
+                defaultValue: "Domestic",
+              },
+              { name: "city", label: "City", defaultValue: "Lahore" },
+              { name: "contact", label: "Contact person", defaultValue: "Buying Manager" },
+              { name: "phone", label: "Phone", defaultValue: "+92 42 0000 0000", required: false },
+              { name: "email", label: "Email", type: "email", defaultValue: "orders@example.com", required: false },
+            ]}
+            onCreate={(values) => {
+              setRows((prev) => [
+                {
+                  id: `CU-${1005 + prev.length}`,
+                  name: values.name,
+                  type: values.type,
+                  city: values.city,
+                  outstanding: 0,
+                  orders: 0,
+                  status: "Active",
+                  contact: values.contact,
+                  phone: values.phone || "—",
+                  email: values.email || "—",
+                },
+                ...prev,
+              ]);
+            }}
+          />
         }
       />
 
       <DataTable<CustomerRow>
-        data={customers as CustomerRow[]}
+        data={rows}
         searchKeys={["id", "name", "city", "type", "contact", "status"]}
         searchPlaceholder="Search customers…"
         statusKey="status"
+        filterKey="status"
+        exportName="customers"
         rowHref={(row) => `/crm/customers/${row.id}`}
         columns={[
           { key: "id", label: "Code" },

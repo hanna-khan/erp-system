@@ -15,9 +15,11 @@ import type { WorkflowStep } from "@/types";
 import { CheckCircle2, Play, Wrench } from "lucide-react";
 
 const catalog: Record<string, { type: string; machine: string; machineId: string; priority: string; status: string; assignee: string; description: string }> = {
-  "MW-112": { type: "Preventive", machine: "Knitting Machine-03", machineId: "M-K03", priority: "Medium", status: "In Progress", assignee: "Tariq Mehmood", description: "Monthly PM — lubricate cams, check needle bed, clean fluff." },
-  "MW-113": { type: "Breakdown", machine: "Sewing Line-02", machineId: "M-S02", priority: "Critical", status: "Open", assignee: "Kamran Shah", description: "Motor overheating and intermittent stop. Line idle since 10:40." },
-  "MW-114": { type: "Corrective", machine: "Loom-001", machineId: "M-L001", priority: "High", status: "Scheduled", assignee: "Shift Tech B", description: "Replace worn heald wires and adjust tension." },
+  "MW-112": { type: "Preventive", machine: "Finishing Press-01", machineId: "M-F01", priority: "Medium", status: "In Progress", assignee: "Tariq Mehmood", description: "Monthly PM — lubricate press, check thermostat, clean lint." },
+  "MW-113": { type: "Breakdown", machine: "Sewing Line-02", machineId: "M-S02", priority: "Critical", status: "Open", assignee: "Junaid Ansari", description: "Motor overheating and intermittent stop. Line idle since 10:40." },
+  "MW-114": { type: "Corrective", machine: "Cutting Table-01", machineId: "M-C01", priority: "High", status: "Scheduled", assignee: "Shift Tech B", description: "Replace worn blade guides and adjust table alignment." },
+  "MW-115": { type: "Preventive", machine: "Print Table-01", machineId: "M-P01", priority: "Low", status: "Completed", assignee: "Tariq Mehmood", description: "Clean screens, check registration stops." },
+  "MW-116": { type: "Breakdown", machine: "Sewing Line-03", machineId: "M-S03", priority: "High", status: "Completed", assignee: "Junaid Ansari", description: "Belt slip fixed; line back online." },
 };
 
 export default function MaintenanceDetailPage({ params }: { params: Promise<{ id: string }> }) {

@@ -11,18 +11,18 @@ import { useToast } from "@/hooks/use-toast";
 import { Building2, Plus } from "lucide-react";
 
 const departments = [
-  { id: "D-PROD", name: "Production", head: "Ahmed Raza", headcount: 420, plant: "All" },
-  { id: "D-QC", name: "Quality", head: "Nadia Sheikh", headcount: 48, plant: "All" },
-  { id: "D-WH", name: "Warehouse", head: "Fatima Ali", headcount: 62, plant: "Karachi / Lahore" },
-  { id: "D-FIN", name: "Finance", head: "Hassan Qureshi", headcount: 18, plant: "HO" },
+  { id: "D-PROD", name: "Production", head: "Farhan Siddiqui", headcount: 420, plant: "All" },
+  { id: "D-QC", name: "Quality", head: "Mehreen Qazi", headcount: 48, plant: "All" },
+  { id: "D-WH", name: "Warehouse", head: "Hira Nadeem", headcount: 62, plant: "Karachi SITE / FG" },
+  { id: "D-FIN", name: "Finance", head: "Waqas Anwar", headcount: 18, plant: "HO" },
   { id: "D-HR", name: "HR", head: "Ayesha Noor", headcount: 12, plant: "HO" },
 ];
 
 const costCenters = [
-  { id: "CC-WEAVE", name: "Weaving", plant: "Faisalabad Plant", budget: "PKR 28M" },
-  { id: "CC-DYE", name: "Dyeing", plant: "Faisalabad Plant", budget: "PKR 34M" },
-  { id: "CC-SEW", name: "Garments", plant: "Lahore Plant", budget: "PKR 22M" },
-  { id: "CC-SPIN", name: "Spinning", plant: "Karachi Plant", budget: "PKR 41M" },
+  { id: "CC-ECOM", name: "E-commerce Fulfillment", plant: "Online Fulfillment Hub", budget: "PKR 18M" },
+  { id: "CC-PRINT", name: "Print / Ombre", plant: "SITE Karachi Plant", budget: "PKR 24M" },
+  { id: "CC-SEW", name: "Garments", plant: "SITE Karachi Plant", budget: "PKR 22M" },
+  { id: "CC-CUT", name: "Cutting", plant: "SITE Karachi Plant", budget: "PKR 12M" },
 ];
 
 export default function OrganizationPage() {

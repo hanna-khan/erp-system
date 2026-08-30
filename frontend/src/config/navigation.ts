@@ -392,8 +392,8 @@ export function getNavigationForRole(role: UserRole): NavGroup[] {
 
 export const ROLE_LABELS: Record<UserRole, string> = {
   super_admin: "Super Admin",
-  tenant_admin: "Tenant Admin",
-  ceo: "CEO / Director",
+  tenant_admin: "Senior Manager",
+  ceo: "CEO",
   production_manager: "Production Manager",
   production_supervisor: "Production Supervisor",
   quality_manager: "Quality Manager",

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { KpiGrid, StatPill } from "@/components/shared/kpi";
 import { DataTable, type Column } from "@/components/shared/data-table";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { WorkflowStepper } from "@/components/shared/workflow";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,13 +15,13 @@ import { statusTone } from "@/mock/data";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import type { WorkflowStep } from "@/types";
-import { ArrowDownToLine, ArrowUpFromLine, Truck } from "lucide-react";
+import { ArrowDownToLine, ArrowUpFromLine } from "lucide-react";
 
 const subcontractJobs = [
-  { id: "SC-801", vendor: "Pearl Dyeing Works", process: "Reactive Dyeing", item: "Grey Fabric 180 GSM", qty: 12000, unit: "MTR", status: "At Vendor", sent: "2026-08-22", eta: "2026-09-02", value: 2400000, so: "SO-1025" },
-  { id: "SC-802", vendor: "Finishing Hub FSD", process: "Compacting", item: "Knitted Fabric", qty: 8500, unit: "KG", status: "In Transit Out", sent: "2026-08-29", eta: "2026-09-05", value: 980000, so: "SO-1024" },
-  { id: "SC-803", vendor: "Pearl Dyeing Works", process: "Softener Finish", item: "Dyed Fabric Navy", qty: 6000, unit: "MTR", status: "Received", sent: "2026-08-10", eta: "2026-08-18", value: 720000, so: "SO-1026" },
-  { id: "SC-804", vendor: "Print Masters", process: "Pigment Print", item: "Cotton Fabric", qty: 4000, unit: "MTR", status: "Draft", sent: "—", eta: "2026-09-12", value: 1100000, so: "SO-1027" },
+  { id: "SC-801", vendor: "SITE Dye & Print Works", process: "Ombre Print", item: "Printed Lawn Fabric (60\")", qty: 12000, unit: "MTR", status: "At Vendor", sent: "2026-08-22", eta: "2026-09-02", value: 2400000, so: "SO-1025" },
+  { id: "SC-802", vendor: "Finishing Hub FSD", process: "Calendering", item: "Knitted Fabric", qty: 8500, unit: "MTR", status: "In Transit Out", sent: "2026-08-29", eta: "2026-09-05", value: 980000, so: "SO-1024" },
+  { id: "SC-803", vendor: "SITE Dye & Print Works", process: "Heat Press Finish", item: "Blush Ombre Fabric", qty: 6000, unit: "MTR", status: "Received", sent: "2026-08-10", eta: "2026-08-18", value: 720000, so: "SO-1026" },
+  { id: "SC-804", vendor: "Print Masters", process: "Ombre Print", item: "Cotton Fabric", qty: 4000, unit: "MTR", status: "Draft", sent: "—", eta: "2026-09-12", value: 1100000, so: "SO-1027" },
 ];
 
 type SCRow = (typeof subcontractJobs)[number] & Record<string, unknown>;
@@ -77,19 +78,74 @@ export default function SubcontractingPage() {
   };
 
   return (
-    <div className="animate-fade-in space-y-6">
+    <div className="animate-fade-in space-y-6 zr-section">
       <PageHeader
         title="Subcontracting"
         description="Send / receive fabric to dyeing and finishing vendors with full chain of custody."
         breadcrumbs={[{ label: "Operations" }, { label: "Subcontracting" }]}
         actions={
-          <Button
-            onClick={() =>
-              toast({ title: "New subcontract job", description: "SC-805 drafted.", tone: "info" })
-            }
-          >
-            <Truck className="size-4" /> New SC Job
-          </Button>
+          <CreateRecordDialog
+            triggerLabel="New SC Job"
+            title="Create subcontract job"
+            description="Example: send lawn fabric to SITE Dye & Print for blush ombre."
+            successTitle="Subcontract job created"
+            fields={[
+              {
+                name: "vendor",
+                label: "Vendor",
+                type: "select",
+                options: ["SITE Dye & Print Works", "Finishing Hub FSD", "Print Masters"],
+                defaultValue: "SITE Dye & Print Works",
+              },
+              {
+                name: "process",
+                label: "Process",
+                type: "select",
+                options: ["Ombre Print", "Calendering", "Heat Press Finish", "Ombre Print"],
+                defaultValue: "Ombre Print",
+              },
+              {
+                name: "item",
+                label: "Material",
+                defaultValue: "Printed Lawn Fabric (60\")",
+              },
+              { name: "qty", label: "Quantity", type: "number", defaultValue: "5000" },
+              {
+                name: "unit",
+                label: "Unit",
+                type: "select",
+                options: ["MTR", "KG", "PCS"],
+                defaultValue: "MTR",
+              },
+              {
+                name: "so",
+                label: "Linked SO",
+                type: "select",
+                options: ["SO-1024", "SO-1025", "SO-1026", "SO-1027"],
+                defaultValue: "SO-1025",
+              },
+              { name: "value", label: "Process value (PKR)", type: "number", defaultValue: "1000000" },
+              { name: "eta", label: "ETA", type: "date", defaultValue: "2026-09-20" },
+            ]}
+            onCreate={(values) => {
+              setRows((prev) => [
+                {
+                  id: `SC-${804 + prev.length}`,
+                  vendor: values.vendor,
+                  process: values.process,
+                  item: values.item,
+                  qty: Number(values.qty) || 0,
+                  unit: values.unit,
+                  status: "Draft",
+                  sent: "—",
+                  eta: values.eta,
+                  value: Number(values.value) || 0,
+                  so: values.so,
+                },
+                ...prev,
+              ]);
+            }}
+          />
         }
       />
 
@@ -117,12 +173,15 @@ export default function SubcontractingPage() {
             columns={columns}
             searchKeys={["id", "vendor", "process", "item", "status"]}
             searchPlaceholder="Search subcontract jobs..."
+            statusKey="status"
+            filterKey="status"
+            exportName="subcontracting"
             actions={
               <>
-                <Button size="sm" variant="outline" onClick={() => markSent(selected.id)}>
+                <Button size="sm" variant="outline" className="rounded-xl" onClick={() => markSent(selected.id)}>
                   <ArrowUpFromLine className="size-3.5" /> Send
                 </Button>
-                <Button size="sm" variant="outline" onClick={() => markReceived(selected.id)}>
+                <Button size="sm" variant="outline" className="rounded-xl" onClick={() => markReceived(selected.id)}>
                   <ArrowDownToLine className="size-3.5" /> Receive
                 </Button>
               </>
@@ -136,7 +195,7 @@ export default function SubcontractingPage() {
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <p className="text-[var(--muted)]">
-                Issue grey fabric against SO, generate gate pass, and update inventory to “At Vendor”.
+                Issue lawn fabric against SO, generate gate pass, and update inventory to “At Vendor”.
               </p>
               <div className="grid gap-2 sm:grid-cols-2">
                 <StatPill label="Selected job" value={selected.id} />
@@ -145,10 +204,10 @@ export default function SubcontractingPage() {
                 <StatPill label="Linked SO" value={selected.so} />
               </div>
               <div className="flex flex-wrap gap-2 pt-2">
-                <Button onClick={() => markSent(selected.id)}>
+                <Button className="rounded-xl" onClick={() => markSent(selected.id)}>
                   <ArrowUpFromLine className="size-4" /> Confirm Send
                 </Button>
-                <Button variant="outline" asChild>
+                <Button variant="outline" className="rounded-xl" asChild>
                   <Link href={`/sales/orders/${selected.so}`}>View Sales Order</Link>
                 </Button>
               </div>
@@ -179,12 +238,12 @@ export default function SubcontractingPage() {
                 {rows
                   .filter((r) => r.status === "At Vendor" || r.status === "In Transit Out")
                   .map((r) => (
-                    <Button key={r.id} variant="outline" onClick={() => markReceived(r.id)}>
+                    <Button key={r.id} variant="outline" className="rounded-xl" onClick={() => markReceived(r.id)}>
                       Receive {r.id}
                     </Button>
                   ))}
               </div>
-              <Button variant="outline" asChild>
+              <Button variant="outline" className="rounded-xl" asChild>
                 <Link href="/quality/inspections">Open QC inspections</Link>
               </Button>
             </CardContent>

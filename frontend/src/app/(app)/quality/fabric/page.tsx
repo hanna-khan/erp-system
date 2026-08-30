@@ -50,12 +50,12 @@ export default function FabricInspectionPage() {
     <div className="space-y-6">
       <PageHeader
         title="Fabric Inspection Map"
-        description="Visual 4-point map for lot BT-DYE-441 · Navy reactive · 58&quot; width."
+        description="Visual 4-point map for lot BT-OMBRE-441 · Blush Ombre · 60&quot; width."
         breadcrumbs={[
           { label: "Quality", href: "/quality" },
           { label: "Fabric Inspection" },
         ]}
-        badge="BT-DYE-441"
+        badge="BT-OMBRE-441"
         actions={
           <Button
             onClick={() =>

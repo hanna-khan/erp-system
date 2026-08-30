@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Factory } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getNavigationForRole } from "@/config/navigation";
 import { useApp } from "@/hooks/use-app";
@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { user, sidebarCollapsed, company, plant } = useApp();
+  const { user, sidebarCollapsed, company } = useApp();
   const navigation = getNavigationForRole(user.role);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     crm: true,
@@ -28,33 +28,19 @@ export function Sidebar() {
         sidebarCollapsed ? "w-[72px]" : "w-64",
       )}
     >
-      <div className="flex items-center gap-3 px-4 pt-5 pb-3">
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6b8cff] to-[#b8a9e8] text-sm font-bold text-white shadow-[var(--shadow-sm)]">
+      <div className="flex h-[60px] items-center gap-3 border-b border-[var(--sidebar-border)] px-4">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#5b7cfa] text-sm font-bold text-white">
           Z
         </div>
         {!sidebarCollapsed ? (
           <div className="min-w-0">
-            <p className="truncate text-sm font-bold tracking-tight text-[var(--foreground)]">
-              Zendrock ERP
+            <p className="truncate text-sm font-semibold tracking-tight text-[var(--foreground)]">
+              Zendrock
             </p>
-            <p className="truncate text-xs text-[var(--sidebar-muted)]">Textile Platform</p>
+            <p className="truncate text-[11px] text-[var(--sidebar-muted)]">{company.shortName}</p>
           </div>
         ) : null}
       </div>
-
-      {!sidebarCollapsed ? (
-        <div className="mx-3 mb-3 rounded-2xl bg-[var(--brand-primary-soft)] p-3">
-          <div className="flex items-center gap-2">
-            <Factory className="size-4 text-[var(--brand-primary)]" />
-            <div className="min-w-0">
-              <p className="truncate text-xs font-semibold text-[var(--foreground)]">
-                {company.shortName}
-              </p>
-              <p className="truncate text-[10px] text-[var(--muted)]">{plant.name}</p>
-            </div>
-          </div>
-        </div>
-      ) : null}
 
       <ScrollArea className="flex-1 px-3 py-2">
         <nav className="space-y-5 pb-6">

@@ -51,7 +51,7 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Localization</CardTitle>
-              <CardDescription>Currency and language for ABC Textiles.</CardDescription>
+              <CardDescription>Currency and language for Cocoon Clothing.</CardDescription>
             </CardHeader>
             <CardContent className="grid max-w-lg gap-4">
               <div className="space-y-2">

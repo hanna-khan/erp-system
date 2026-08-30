@@ -1,26 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { KpiGrid } from "@/components/shared/kpi";
 import { DataTable, type Column } from "@/components/shared/data-table";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { statusTone } from "@/mock/data";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency, formatNumber } from "@/lib/utils";
-import { Plus } from "lucide-react";
 
-const assets = [
-  { id: "AST-1001", name: "Loom-001", category: "Production Machine", plant: "Faisalabad Plant", cost: 18500000, book: 11200000, acquired: "2019-03-01", status: "Active", linked: "M-L001" },
-  { id: "AST-1002", name: "Dyeing Machine-01", category: "Production Machine", plant: "Faisalabad Plant", cost: 42000000, book: 28600000, acquired: "2020-06-15", status: "Active", linked: "M-D01" },
-  { id: "AST-1003", name: "Compressor Unit C-2", category: "Utilities", plant: "Karachi Plant", cost: 3200000, book: 1800000, acquired: "2021-01-10", status: "Active", linked: "—" },
-  { id: "AST-1004", name: "Forklift FL-04", category: "Material Handling", plant: "Lahore Plant", cost: 2100000, book: 980000, acquired: "2018-11-20", status: "Under Maintenance", linked: "—" },
+const initialAssets = [
+  { id: "AST-1001", name: "Cutting Table-01", category: "Production Machine", plant: "SITE Karachi Plant", cost: 18500000, book: 11200000, acquired: "2019-03-01", status: "Active", linked: "M-C01" },
+  { id: "AST-1002", name: "Print Table-01", category: "Production Machine", plant: "SITE Karachi Plant", cost: 42000000, book: 28600000, acquired: "2020-06-15", status: "Active", linked: "M-P01" },
+  { id: "AST-1003", name: "Compressor Unit C-2", category: "Utilities", plant: "SITE Karachi Plant", cost: 3200000, book: 1800000, acquired: "2021-01-10", status: "Active", linked: "—" },
+  { id: "AST-1004", name: "Forklift FL-04", category: "Material Handling", plant: "Karachi FG Warehouse", cost: 2100000, book: 980000, acquired: "2018-11-20", status: "Under Maintenance", linked: "—" },
   { id: "AST-1005", name: "ERP Servers Rack", category: "IT", plant: "Karachi HO", cost: 4500000, book: 2100000, acquired: "2022-04-01", status: "Active", linked: "—" },
-  { id: "AST-1006", name: "Sewing Line-02", category: "Production Machine", plant: "Lahore Plant", cost: 9800000, book: 6400000, acquired: "2021-09-12", status: "Breakdown", linked: "M-S02" },
+  { id: "AST-1006", name: "Sewing Line-02", category: "Production Machine", plant: "SITE Karachi Plant", cost: 9800000, book: 6400000, acquired: "2021-09-12", status: "Breakdown", linked: "M-S02" },
 ];
 
-type AssetRow = (typeof assets)[number] & Record<string, unknown>;
+type AssetRow = (typeof initialAssets)[number] & Record<string, unknown>;
 
 const columns: Column<AssetRow>[] = [
   { key: "id", label: "Asset #" },
@@ -58,53 +59,94 @@ const columns: Column<AssetRow>[] = [
 
 export default function AssetsPage() {
   const { toast } = useToast();
-  const totalBook = assets.reduce((s, a) => s + a.book, 0);
+  const [rows, setRows] = useState(initialAssets as AssetRow[]);
+  const totalBook = rows.reduce((s, a) => s + Number(a.book), 0);
 
   return (
-    <div className="animate-fade-in space-y-6">
+    <div className="animate-fade-in space-y-6 zr-section">
       <PageHeader
         title="Fixed Assets"
         description="Asset register linked to machines, depreciation and maintenance."
         breadcrumbs={[{ label: "Finance" }, { label: "Assets" }]}
         actions={
           <>
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="rounded-xl">
               <Link href="/finance">Finance hub</Link>
             </Button>
-            <Button
-              onClick={() =>
-                toast({ title: "Asset registered", description: "AST-1007 added to register.", tone: "success" })
-              }
-            >
-              <Plus className="size-4" /> Add Asset
-            </Button>
+            <CreateRecordDialog
+              triggerLabel="Add Asset"
+              title="Register fixed asset"
+              description="Example: capitalize a new finishing press at SITE Karachi."
+              successTitle="Asset registered"
+              fields={[
+                { name: "name", label: "Asset name", defaultValue: "Finishing Press-02" },
+                {
+                  name: "category",
+                  label: "Category",
+                  type: "select",
+                  options: ["Production Machine", "Utilities", "Material Handling", "IT"],
+                  defaultValue: "Production Machine",
+                },
+                {
+                  name: "plant",
+                  label: "Location",
+                  type: "select",
+                  options: ["SITE Karachi Plant", "Karachi FG Warehouse", "Online Fulfillment Hub", "Karachi HO"],
+                  defaultValue: "Online Fulfillment Hub",
+                },
+                { name: "cost", label: "Acquisition cost (PKR)", type: "number", defaultValue: "25000000" },
+                { name: "acquired", label: "Acquired date", type: "date", defaultValue: "2026-08-30" },
+                { name: "linked", label: "Linked machine ID", defaultValue: "—", required: false },
+              ]}
+              onCreate={(values) => {
+                const cost = Number(values.cost) || 0;
+                setRows((prev) => [
+                  {
+                    id: `AST-${1006 + prev.length}`,
+                    name: values.name,
+                    category: values.category,
+                    plant: values.plant,
+                    cost,
+                    book: cost,
+                    acquired: values.acquired,
+                    status: "Active",
+                    linked: values.linked || "—",
+                  },
+                  ...prev,
+                ]);
+              }}
+            />
           </>
         }
       />
 
       <KpiGrid
         items={[
-          { id: "count", label: "Assets", value: String(assets.length) },
+          { id: "count", label: "Assets", value: String(rows.length) },
           { id: "book", label: "Book Value", value: formatCurrency(totalBook), tone: "info" },
           { id: "depr", label: "Depreciation MTD", value: "PKR 1.85M" },
-          { id: "maint", label: "Under Maintenance", value: "1", tone: "warning" },
+          { id: "maint", label: "Under Maintenance", value: String(rows.filter((r) => r.status === "Under Maintenance").length), tone: "warning" },
         ]}
         columns={4}
       />
 
       <DataTable
-        data={assets as AssetRow[]}
+        data={rows}
         columns={columns}
         searchKeys={["id", "name", "category", "plant", "status"]}
         searchPlaceholder="Search assets..."
+        statusKey="status"
+        filterKey="status"
+        exportName="assets"
         actions={
           <Button
             size="sm"
             variant="outline"
+            className="rounded-xl"
             onClick={() =>
               toast({
                 title: "Depreciation run",
-                description: `Posted for ${formatNumber(assets.length)} assets.`,
+                description: `Posted for ${formatNumber(rows.length)} assets.`,
                 tone: "success",
               })
             }

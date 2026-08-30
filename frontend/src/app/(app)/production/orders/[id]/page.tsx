@@ -48,7 +48,7 @@ export default function ProductionOrderDetailPage({
           { id: "r3", label: "Finishing", status: "upcoming", meta: "Queued" },
           { id: "r4", label: "Packing", status: "upcoming", meta: "Pending" },
           { id: "r5", label: "Final QC", status: "upcoming", href: "/quality/inspections", meta: "QC-1202" },
-          { id: "r6", label: "FG Put-away", status: "upcoming", href: "/warehouse", meta: "LHR-FG-01" },
+          { id: "r6", label: "FG Put-away", status: "upcoming", href: "/warehouse", meta: "KHI-FG-01" },
         ]
       : (template?.steps ?? ["Start", "Process", "Finish"]).map((label, i, arr) => ({
           id: `r${i}`,
@@ -68,7 +68,7 @@ export default function ProductionOrderDetailPage({
     ? bomLines.map((b) => ({
         ...b,
         required: Math.ceil(b.qty * order.qty * (1 + (b.scrap + b.waste) / 100)),
-        issued: b.component.includes("Label")
+        issued: b.component.includes("Hang") || b.component.includes("Tag")
           ? 1250
           : b.component.includes("Fabric")
             ? Math.round(b.qty * order.completed)
@@ -77,9 +77,9 @@ export default function ProductionOrderDetailPage({
     : [
         {
           id: "1",
-          component: order.product.includes("Yarn") ? "Raw Cotton Grade A" : "Process input",
+          component: order.product.includes("Lawn") || order.product.includes("Fabric") ? "Printed Lawn Fabric (60\")" : "Process input",
           qty: 1,
-          unit: "KG",
+          unit: "MTR",
           scrap: 2,
           waste: 1,
           cost: 350,
@@ -138,7 +138,7 @@ export default function ProductionOrderDetailPage({
       </div>
 
       {isTshirt ? (
-        <WorkflowStepper title="End-to-end T-shirt program" steps={tshirtWorkflow} />
+        <WorkflowStepper title="End-to-end Prism Kaftaan program" steps={tshirtWorkflow} />
       ) : null}
 
       <WorkflowStepper title="Routing / operations" steps={routingSteps} />
@@ -170,7 +170,7 @@ export default function ProductionOrderDetailPage({
               <CardHeader className="flex-row items-center justify-between">
                 <div>
                   <CardTitle>Style {colorSizeMatrix.style}</CardTitle>
-                  <p className="text-sm text-[var(--muted)]">Men&apos;s T-Shirt · 180 GSM · Garments flow</p>
+                  <p className="text-sm text-[var(--muted)]">Prism Kaftaan 2-Piece · SITE Karachi garments flow</p>
                 </div>
                 <Badge variant="info">Garments</Badge>
               </CardHeader>
@@ -344,8 +344,8 @@ export default function ProductionOrderDetailPage({
                 events={
                   isTshirt
                     ? [
-                        { id: "1", title: "PRO created from SO-1024", meta: "Ahmed Raza", time: "2026-08-21 08:40" },
-                        { id: "2", title: "BOM TS-BASIC-27 locked", meta: "Fabric + trims", time: "2026-08-22" },
+                        { id: "1", title: "PRO created from SO-1024", meta: "Farhan Siddiqui", time: "2026-08-21 08:40" },
+                        { id: "2", title: "BOM CCN-KAFT-PRISM locked", meta: "Fabric + trims", time: "2026-08-22" },
                         { id: "3", title: "Cutting completed", meta: "WO-9101 · 10,000 pcs", time: "2026-08-26" },
                         { id: "4", title: "Stitching in progress", meta: "WO-9102 · 42% · Line-01", time: "2026-08-29" },
                         { id: "5", title: "In-process QC conditional", meta: "QC-1202 · 42 defects", time: "2026-08-29" },

@@ -12,7 +12,7 @@ import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const [email, setEmail] = useState("imran@abctextiles.pk");
+  const [email, setEmail] = useState("salman@cocoon.pk");
   const [password, setPassword] = useState("demo1234");
   const [show, setShow] = useState(false);
   const [mfa, setMfa] = useState(false);
@@ -33,7 +33,7 @@ export default function LoginPage() {
       toast({ title: "Invalid code", description: "Please enter a valid OTP.", tone: "error" });
       return;
     }
-    toast({ title: "Welcome back", description: "Signed in to ABC Textile Mills.", tone: "success" });
+    toast({ title: "Welcome back", description: "Signed in to Cocoon Clothing.", tone: "success" });
     router.push("/dashboard");
   };
 

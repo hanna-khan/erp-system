@@ -5,19 +5,17 @@ import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { KpiGrid } from "@/components/shared/kpi";
 import { DataTable, type Column } from "@/components/shared/data-table";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { statusTone } from "@/mock/data";
-import { useToast } from "@/hooks/use-toast";
-import { Plus } from "lucide-react";
 
 const workOrders = [
-  { id: "MW-112", type: "Preventive", machine: "Knitting Machine-03", machineId: "M-K03", priority: "Medium", status: "In Progress", assignee: "Tariq Mehmood", opened: "2026-08-29", due: "2026-08-30" },
-  { id: "MW-113", type: "Breakdown", machine: "Sewing Line-02", machineId: "M-S02", priority: "Critical", status: "Open", assignee: "Kamran Shah", opened: "2026-08-30", due: "2026-08-30" },
-  { id: "MW-114", type: "Corrective", machine: "Loom-001", machineId: "M-L001", priority: "High", status: "Scheduled", assignee: "Shift Tech B", opened: "2026-08-28", due: "2026-09-01" },
-  { id: "MW-115", type: "Preventive", machine: "Dyeing Machine-01", machineId: "M-D01", priority: "Low", status: "Completed", assignee: "Tariq Mehmood", opened: "2026-08-20", due: "2026-08-21" },
-  { id: "MW-116", type: "Breakdown", machine: "Loom-002", machineId: "M-L002", priority: "High", status: "Completed", assignee: "Kamran Shah", opened: "2026-08-15", due: "2026-08-15" },
+  { id: "MW-112", type: "Preventive", machine: "Finishing Press-01", machineId: "M-F01", priority: "Medium", status: "In Progress", assignee: "Tariq Mehmood", opened: "2026-08-29", due: "2026-08-30" },
+  { id: "MW-113", type: "Breakdown", machine: "Sewing Line-02", machineId: "M-S02", priority: "Critical", status: "Open", assignee: "Junaid Ansari", opened: "2026-08-30", due: "2026-08-30" },
+  { id: "MW-114", type: "Corrective", machine: "Cutting Table-01", machineId: "M-C01", priority: "High", status: "Scheduled", assignee: "Shift Tech B", opened: "2026-08-28", due: "2026-09-01" },
+  { id: "MW-115", type: "Preventive", machine: "Print Table-01", machineId: "M-P01", priority: "Low", status: "Completed", assignee: "Tariq Mehmood", opened: "2026-08-20", due: "2026-08-21" },
+  { id: "MW-116", type: "Breakdown", machine: "Sewing Line-03", machineId: "M-S03", priority: "High", status: "Completed", assignee: "Junaid Ansari", opened: "2026-08-15", due: "2026-08-15" },
 ];
 
 type WORow = (typeof workOrders)[number] & Record<string, unknown>;
@@ -62,23 +60,69 @@ const columns: Column<WORow>[] = [
 ];
 
 export default function MaintenancePage() {
-  const { toast } = useToast();
-  const [rows] = useState(workOrders as WORow[]);
+  const [rows, setRows] = useState(workOrders as WORow[]);
 
   return (
-    <div className="animate-fade-in space-y-6">
+    <div className="animate-fade-in space-y-6 zr-section">
       <PageHeader
         title="Maintenance"
         description="Preventive, corrective and breakdown work orders with MTBF / MTTR tracking."
         breadcrumbs={[{ label: "Operations" }, { label: "Maintenance" }]}
         actions={
-          <Button
-            onClick={() =>
-              toast({ title: "Work order created", description: "MW-117 drafted for review.", tone: "success" })
-            }
-          >
-            <Plus className="size-4" /> New Work Order
-          </Button>
+          <CreateRecordDialog
+            triggerLabel="New Work Order"
+            title="Create maintenance work order"
+            description="Example: preventive service on a dyeing machine before the next navy lot."
+            successTitle="Work order created"
+            fields={[
+              {
+                name: "type",
+                label: "Type",
+                type: "select",
+                options: ["Preventive", "Corrective", "Breakdown"],
+                defaultValue: "Preventive",
+              },
+              {
+                name: "machine",
+                label: "Machine",
+                type: "select",
+                options: ["Finishing Press-01", "Sewing Line-02", "Cutting Table-01", "Print Table-01", "Sewing Line-03"],
+                defaultValue: "Print Table-01",
+              },
+              {
+                name: "priority",
+                label: "Priority",
+                type: "select",
+                options: ["Low", "Medium", "High", "Critical"],
+                defaultValue: "Medium",
+              },
+              { name: "assignee", label: "Assignee", defaultValue: "Tariq Mehmood" },
+              { name: "due", label: "Due date", type: "date", defaultValue: "2026-09-05" },
+            ]}
+            onCreate={(values) => {
+              const machineIds: Record<string, string> = {
+                "Finishing Press-01": "M-F01",
+                "Sewing Line-02": "M-S02",
+                "Cutting Table-01": "M-C01",
+                "Print Table-01": "M-P01",
+                "Sewing Line-03": "M-S03",
+              };
+              setRows((prev) => [
+                {
+                  id: `MW-${116 + prev.length}`,
+                  type: values.type,
+                  machine: values.machine,
+                  machineId: machineIds[values.machine] ?? "M-C01",
+                  priority: values.priority,
+                  status: "Open",
+                  assignee: values.assignee,
+                  opened: "2026-08-30",
+                  due: values.due,
+                },
+                ...prev,
+              ]);
+            }}
+          />
         }
       />
 
@@ -110,6 +154,9 @@ export default function MaintenancePage() {
                 searchKeys={["id", "machine", "assignee", "type", "status"]}
                 searchPlaceholder="Search work orders..."
                 rowHref={(row) => `/maintenance/${row.id}`}
+                statusKey="status"
+                filterKey="status"
+                exportName="maintenance-work-orders"
               />
             </TabsContent>
           );

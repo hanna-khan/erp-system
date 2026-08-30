@@ -14,7 +14,7 @@ import { formatCurrency } from "@/lib/utils";
 const bills = [
   { id: "BILL-3301", supplier: "Cotton Supplier A", po: "PO-4401", date: "2026-08-25", due: "2026-09-24", amount: 18500000, paid: 0, status: "Open" },
   { id: "BILL-3302", supplier: "Chemical Supplier C", po: "PO-4402", date: "2026-08-20", due: "2026-09-04", amount: 3600000, paid: 1800000, status: "Partial" },
-  { id: "BILL-3303", supplier: "Yarn Supplier B", po: "PO-4403", date: "2026-08-10", due: "2026-08-25", amount: 9300000, paid: 9300000, status: "Paid" },
+  { id: "BILL-3303", supplier: "Karachi Embroidery House", po: "PO-4403", date: "2026-08-10", due: "2026-08-25", amount: 9300000, paid: 9300000, status: "Paid" },
   { id: "BILL-3304", supplier: "Accessories Hub", po: "PO-4404", date: "2026-08-29", due: "2026-09-28", amount: 875000, paid: 0, status: "Pending Approval" },
 ];
 

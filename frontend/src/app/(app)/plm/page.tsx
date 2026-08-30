@@ -34,7 +34,7 @@ export default function PlmPage() {
       <Card>
         <CardContent className="flex items-center gap-3 p-5 text-sm text-[var(--muted)]">
           <Shirt className="size-5 text-[var(--brand-primary)]" />
-          Linked to products, BOM and color × size matrix for TS-BASIC-27.
+          Linked to products, BOM and color × size matrix for CCN-KAFT-PRISM.
         </CardContent>
       </Card>
     </div>

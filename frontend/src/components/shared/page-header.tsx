@@ -27,7 +27,12 @@ export function PageHeader({
   className,
 }: PageHeaderProps) {
   return (
-    <div className={cn("mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between", className)}>
+    <div
+      className={cn(
+        "zr-section mb-6 flex flex-col gap-4 rounded-2xl border border-[var(--border)] bg-white/80 p-5 shadow-[var(--shadow-xs)] backdrop-blur-sm sm:flex-row sm:items-start sm:justify-between",
+        className,
+      )}
+    >
       <div className="min-w-0">
         {breadcrumbs && breadcrumbs.length > 0 ? (
           <nav className="mb-2 flex flex-wrap items-center gap-1 text-xs text-[var(--muted)]">
@@ -35,22 +40,27 @@ export function PageHeader({
               <span key={`${crumb.label}-${index}`} className="flex items-center gap-1">
                 {index > 0 ? <ChevronRight className="size-3 opacity-50" /> : null}
                 {crumb.href ? (
-                  <Link href={crumb.href} className="hover:text-[var(--brand-primary)]">
+                  <Link
+                    href={crumb.href}
+                    className="rounded-md px-1 py-0.5 hover:bg-[var(--brand-primary-soft)] hover:text-[var(--brand-primary)]"
+                  >
                     {crumb.label}
                   </Link>
                 ) : (
-                  <span className="text-[var(--foreground)]">{crumb.label}</span>
+                  <span className="font-medium text-[var(--foreground)]">{crumb.label}</span>
                 )}
               </span>
             ))}
           </nav>
         ) : null}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <h1 className="zr-page-title">{title}</h1>
           {badge ? <Badge variant="info">{badge}</Badge> : null}
         </div>
         {description ? (
-          <p className="mt-1 max-w-3xl text-sm text-[var(--muted)]">{description}</p>
+          <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">
+            {description}
+          </p>
         ) : null}
       </div>
       {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
@@ -68,12 +78,16 @@ interface EmptyStateProps {
 
 export function EmptyState({ title, description, actionLabel, onAction, icon }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-[var(--radius-lg)] border border-dashed border-[var(--border)] bg-[var(--surface)] px-6 py-16 text-center">
-      {icon ? <div className="mb-4 text-[var(--brand-primary)]">{icon}</div> : null}
+    <div className="flex flex-col items-center justify-center rounded-[var(--radius-xl)] border border-dashed border-[var(--border)] bg-white px-6 py-16 text-center shadow-[var(--shadow-xs)]">
+      {icon ? (
+        <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]">
+          {icon}
+        </div>
+      ) : null}
       <h3 className="text-base font-semibold text-[var(--foreground)]">{title}</h3>
       {description ? <p className="mt-1 max-w-md text-sm text-[var(--muted)]">{description}</p> : null}
       {actionLabel && onAction ? (
-        <Button className="mt-4" onClick={onAction}>
+        <Button className="mt-4 rounded-xl" onClick={onAction}>
           {actionLabel}
         </Button>
       ) : null}

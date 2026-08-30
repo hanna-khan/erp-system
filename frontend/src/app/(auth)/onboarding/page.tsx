@@ -57,7 +57,7 @@ export default function OnboardingPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2 sm:col-span-2">
                 <Label>Company name</Label>
-                <Input defaultValue="ABC Textile Mills (Pvt) Ltd" />
+                <Input defaultValue="Cocoon Clothing" />
               </div>
               <div className="space-y-2">
                 <Label>NTN</Label>
@@ -79,7 +79,7 @@ export default function OnboardingPage() {
           )}
           {step === 1 && (
             <div className="space-y-3">
-              {["Karachi Plant — Integrated", "Lahore Plant — Garments", "Faisalabad Plant — Weaving & Dyeing"].map(
+              {["SITE Karachi Plant — Garments / RTW", "Karachi FG Warehouse — Finished Goods", "Online Fulfillment Hub — E-commerce"].map(
                 (p) => (
                   <label key={p} className="flex items-center gap-3 rounded-xl border border-[var(--border)] p-4">
                     <input type="checkbox" defaultChecked className="rounded" />
@@ -128,7 +128,7 @@ export default function OnboardingPage() {
           {step === 3 && (
             <div className="space-y-3 text-sm">
               <p className="text-[var(--muted)]">Invite your leadership team (mock).</p>
-              {["CEO", "Production Manager", "Sales Manager", "Accountant"].map((role) => (
+              {["CEO (Salman Sabir)", "Senior Manager (Nargis Imran)", "Sales Manager", "Accountant"].map((role) => (
                 <div key={role} className="grid gap-2 rounded-xl border border-[var(--border)] p-3 sm:grid-cols-3">
                   <Input placeholder={`${role} name`} />
                   <Input placeholder="email@company.pk" />
@@ -141,7 +141,7 @@ export default function OnboardingPage() {
             <div className="space-y-4 text-center">
               <p className="text-lg font-semibold">You are ready to go live</p>
               <p className="text-sm text-[var(--muted)]">
-                Demo tenant ABC Textile Mills will open with sample textile data across all enabled modules.
+                Demo tenant Cocoon Clothing (cocoon.pk) will open with sample ready-to-wear data across all enabled modules.
               </p>
             </div>
           )}

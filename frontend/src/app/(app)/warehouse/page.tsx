@@ -13,7 +13,7 @@ import { ListChecks, MapPin, ScanBarcode } from "lucide-react";
 const warehouseFlow: WorkflowStep[] = [
   { id: "1", label: "Receiving", status: "completed", href: "/procurement/receipts", meta: "GRN-8802" },
   { id: "2", label: "QC Hold", status: "completed", href: "/quality/inspections", meta: "Released" },
-  { id: "3", label: "Put-away", status: "current", href: "/warehouse/locations", meta: "FSD-CHM-01" },
+  { id: "3", label: "Put-away", status: "current", href: "/warehouse/locations", meta: "KHI-RM-01" },
   { id: "4", label: "Picking", status: "upcoming", href: "/warehouse/picking", meta: "Pick lists" },
   { id: "5", label: "Packing", status: "upcoming", href: "/warehouse", meta: "Cartons" },
   { id: "6", label: "Dispatch", status: "upcoming", href: "/dispatch", meta: "DO queue" },
@@ -31,7 +31,7 @@ export default function WarehouseDashboardPage() {
         badge="WMS"
         actions={
           <>
-            <Button variant="outline" onClick={() => toast({ title: "Put-away task created", description: "Task WH-221 for FSD-CHM-01.", tone: "info" })}>
+            <Button variant="outline" onClick={() => toast({ title: "Put-away task created", description: "Task WH-221 for KHI-RM-01.", tone: "info" })}>
               New put-away
             </Button>
             <Button onClick={() => toast({ title: "Pick wave released", description: "Wave W-88 for SO-1025.", tone: "success" })}>
@@ -75,8 +75,8 @@ export default function WarehouseDashboardPage() {
           </CardHeader>
           <CardContent className="grid gap-3 sm:grid-cols-3">
             <StatPill label="Karachi RM" value="82% full" tone="warning" />
-            <StatPill label="Faisalabad WIP" value="71% full" tone="info" />
-            <StatPill label="Lahore FG" value="64% full" tone="success" />
+            <StatPill label="Karachi WIP" value="71% full" tone="info" />
+            <StatPill label="Karachi FG" value="64% full" tone="success" />
           </CardContent>
         </Card>
         <Card>
@@ -88,8 +88,8 @@ export default function WarehouseDashboardPage() {
               events={[
                 { id: "1", title: "GRN-8802 put-away complete", meta: "Reactive Dye → FSD-CHM A-02-B", time: "11:20" },
                 { id: "2", title: "Pick list PL-220 started", meta: "SO-1025 · Navy fabric", time: "13:05" },
-                { id: "3", title: "Scan mismatch flagged", meta: "ACC-LABEL bin LHR-A-11", time: "14:42" },
-                { id: "4", title: "FG receipt from PRO-7001", meta: "800 pcs → LHR-FG-01", time: "15:10" },
+                { id: "3", title: "Scan mismatch flagged", meta: "ACC-TAG-CCN bin LHR-A-11", time: "14:42" },
+                { id: "4", title: "FG receipt from PRO-7001", meta: "800 pcs → KHI-FG-01", time: "15:10" },
               ]}
             />
           </CardContent>

@@ -14,7 +14,7 @@ export default function ProcessTemplatesPage() {
     <div className="space-y-6">
       <PageHeader
         title="Process templates"
-        description="Reusable routing pipelines for spinning, weaving, dyeing, printing, and garments."
+        description="Reusable routing pipelines for cutting, print, stitch, finishing, and packing."
         breadcrumbs={[
           { label: "Products", href: "/products" },
           { label: "Processes" },

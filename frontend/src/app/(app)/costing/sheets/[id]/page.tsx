@@ -15,9 +15,9 @@ import { formatCurrency, formatPercent } from "@/lib/utils";
 
 const sheetMeta: Record<string, { product: string; style: string; process: string; pro?: string }> = {
   "CS-TS-27": { product: costSheet.product, style: costSheet.style, process: "Garments", pro: "PRO-7001" },
-  "CS-POLO-26": { product: "Polo Shirt", style: "POLO-CORE-26", process: "Garments" },
-  "CS-DF-58": { product: "Dyed Fabric Reactive", style: "DF-REAC-58", process: "Dyeing", pro: "PRO-7002" },
-  "CS-GREY-180": { product: "Cotton Fabric 180 GSM", style: "GREY-180", process: "Weaving", pro: "PRO-7003" },
+  "CS-MATCHA-26": { product: "Matcha | 2-Piece", style: "CCN-RTW-MATCHA", process: "Garments" },
+  "CS-DF-58": { product: "Fairy Meadows 2-Piece", style: "CCN-LAWN-FAIRY", process: "Dyeing", pro: "PRO-7002" },
+  "CS-LAWN-60": { product: "Printed Lawn Fabric (60\")", style: "LAWN-60", process: "Cutting / Stitch", pro: "PRO-7003" },
 };
 
 type CostBucket = keyof typeof costSheet.standard;
@@ -36,25 +36,25 @@ const buckets: { key: CostBucket; label: string }[] = [
 
 function costsFor(id: string) {
   if (id === "CS-TS-27") return costSheet;
-  if (id === "CS-POLO-26") {
+  if (id === "CS-MATCHA-26") {
     return {
-      product: "Polo Shirt",
-      style: "POLO-CORE-26",
+      product: "Matcha | 2-Piece",
+      style: "CCN-RTW-MATCHA",
       standard: { material: 720, labor: 140, machine: 55, utilities: 35, overhead: 70, packaging: 45, waste: 25, subcontract: 30, total: 1120 },
       actual: { material: 700, labor: 138, machine: 52, utilities: 34, overhead: 70, packaging: 45, waste: 22, subcontract: 34, total: 1095 },
     };
   }
   if (id === "CS-DF-58") {
     return {
-      product: "Dyed Fabric Reactive",
-      style: "DF-REAC-58",
+      product: "Fairy Meadows 2-Piece",
+      style: "CCN-LAWN-FAIRY",
       standard: { material: 260, labor: 28, machine: 35, utilities: 22, overhead: 20, packaging: 8, waste: 12, subcontract: 0, total: 385 },
       actual: { material: 278, labor: 30, machine: 38, utilities: 24, overhead: 20, packaging: 8, waste: 14, subcontract: 0, total: 412 },
     };
   }
   return {
-    product: "Cotton Fabric 180 GSM",
-    style: "GREY-180",
+    product: "Printed Lawn Fabric (60\")",
+    style: "LAWN-60",
     standard: { material: 180, labor: 22, machine: 28, utilities: 12, overhead: 15, packaging: 3, waste: 5, subcontract: 0, total: 265 },
     actual: { material: 176, labor: 21, machine: 27, utilities: 11, overhead: 15, packaging: 3, waste: 5, subcontract: 0, total: 258 },
   };
@@ -217,7 +217,7 @@ export default function CostSheetDetailPage({ params }: { params: Promise<{ id: 
                 })}
               {id === "CS-TS-27" ? (
                 <p className="pt-2 text-xs text-[var(--muted)]">
-                  Material + waste are the primary adverse drivers on the T-shirt program — align with{" "}
+                  Material + waste are the primary adverse drivers on the Prism Kaftaan program — align with{" "}
                   <Link href="/production/orders/PRO-7001" className="text-[var(--brand-primary)] hover:underline">
                     PRO-7001
                   </Link>{" "}

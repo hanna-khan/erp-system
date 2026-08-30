@@ -11,7 +11,7 @@ import { Plus } from "lucide-react";
 const shifts = [
   { id: "SH-A", name: "Shift A", start: "06:00", end: "14:00", breakMin: 30, plants: "All", headcount: 86, status: "Active" },
   { id: "SH-B", name: "Shift B", start: "14:00", end: "22:00", breakMin: 30, plants: "FSD + LHR", headcount: 64, status: "Active" },
-  { id: "SH-C", name: "Shift C", start: "22:00", end: "06:00", breakMin: 30, plants: "Faisalabad", headcount: 28, status: "Active" },
+  { id: "SH-C", name: "Shift C", start: "22:00", end: "06:00", breakMin: 30, plants: "SITE Karachi", headcount: 28, status: "Active" },
   { id: "SH-G", name: "General", start: "09:00", end: "18:00", breakMin: 60, plants: "HO + Offices", headcount: 42, status: "Active" },
 ];
 

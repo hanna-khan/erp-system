@@ -32,7 +32,7 @@ export default function FinancePage() {
     <div className="animate-fade-in space-y-6">
       <PageHeader
         title="Finance"
-        description="Textile mill financial control — GL, AR/AP, tax (PKR) and statutory reports."
+        description="Cocoon Clothing financial control — GL, AR/AP, tax (PKR) and statutory reports."
         breadcrumbs={[{ label: "Finance" }]}
         actions={
           <Button

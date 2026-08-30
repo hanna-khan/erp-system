@@ -27,7 +27,7 @@ export default function BomDetailPage({
   const { id } = use(params);
   const { toast } = useToast();
   const isTee = id.includes("TS") || id === "BOM-TS-27";
-  const title = isTee ? "BOM-TS-27 · Men's T-Shirt" : id;
+  const title = isTee ? "BOM-TS-27 · Prism Kaftaan 2-Piece" : id;
   const lines = bomLines;
   const materialCost = lines.reduce((s, l) => s + l.cost, 0);
   const altCost = altBom.reduce((s, l) => s + l.cost, 0);
@@ -65,7 +65,7 @@ export default function BomDetailPage({
       />
 
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-        <StatPill label="Style" value={isTee ? "TS-BASIC-27" : "—"} tone="info" />
+        <StatPill label="Style" value={isTee ? "CCN-KAFT-PRISM" : "—"} tone="info" />
         <StatPill label="Components" value={lines.length} />
         <StatPill label="Material / pc" value={formatCurrency(materialCost)} />
         <StatPill label="Linked product" value="PR-TS" />
@@ -75,13 +75,13 @@ export default function BomDetailPage({
         <p className="zr-label mb-3">BOM structure</p>
         <div className="space-y-2 text-sm">
           <div className="rounded-lg border border-[var(--brand-primary)]/30 bg-[var(--brand-primary-soft)] px-3 py-2 font-medium">
-            L0 · Men&apos;s T-Shirt (FG) · 1 PCS
+            L0 · Prism Kaftaan 2-Piece (FG) · 1 PCS
           </div>
           <div className="ml-4 space-y-2 border-l-2 border-[var(--border)] pl-4">
             <div className="rounded-lg border border-[var(--border)] px-3 py-2">
               L1 · Cut fabric panel kit · 1 SET
               <div className="mt-2 ml-2 space-y-1 border-l border-dashed border-[var(--border)] pl-3 text-xs text-[var(--muted)]">
-                <p>L2 · Cotton Fabric 180 GSM · 1.35 MTR (+3% scrap)</p>
+                <p>L2 · Printed Lawn Fabric (60\") · 1.35 MTR (+3% scrap)</p>
               </div>
             </div>
             <div className="rounded-lg border border-[var(--border)] px-3 py-2">L1 · Trims pack · 1 SET</div>

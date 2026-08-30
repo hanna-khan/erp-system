@@ -19,7 +19,7 @@ export default function HrPage() {
     <div className="animate-fade-in space-y-6">
       <PageHeader
         title="Human Resources"
-        description="Workforce for spinning, weaving, dyeing and garment operations."
+        description="Workforce for cutting, stitch, quality and fulfillment operations."
         breadcrumbs={[{ label: "HR" }]}
       />
 

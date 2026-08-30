@@ -1,23 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { KpiGrid } from "@/components/shared/kpi";
 import { DataTable } from "@/components/shared/data-table";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { statusTone } from "@/mock/data";
 import { formatNumber } from "@/lib/utils";
-import { Check, Play } from "lucide-react";
+import { Play } from "lucide-react";
 
-const pickLists = [
-  { id: "PL-218", order: "SO-1025", customer: "Export Customer B", lines: 3, qty: 8000, unit: "MTR", warehouse: "FSD-FG", priority: "High", status: "In Progress", picker: "Asif Khan" },
-  { id: "PL-219", order: "SO-1024", customer: "Fashion Retailer A", lines: 4, qty: 2000, unit: "PCS", warehouse: "LHR-FG-01", priority: "Normal", status: "Released", picker: "—" },
-  { id: "PL-220", order: "SO-1027", customer: "Local Distributor C", lines: 2, qty: 5000, unit: "MTR", warehouse: "FSD-WIP-01", priority: "Normal", status: "Draft", picker: "—" },
-  { id: "PL-221", order: "PRO-7001", customer: "Internal · Stitching", lines: 2, qty: 4200, unit: "PCS", warehouse: "LHR-ACC-01", priority: "Urgent", status: "Picked", picker: "Saba Fatima" },
-  { id: "PL-222", order: "SO-1026", customer: "Nordic Apparel AS", lines: 1, qty: 6000, unit: "PCS", warehouse: "LHR-FG-01", priority: "Normal", status: "Completed", picker: "Asif Khan" },
+const initialPickLists = [
+  { id: "PL-218", order: "SO-1025", customer: "Gulf Style Trading (UAE)", lines: 3, qty: 8000, unit: "MTR", warehouse: "KHI-FG-01", priority: "High", status: "In Progress", picker: "Asif Khan" },
+  { id: "PL-219", order: "SO-1024", customer: "Boutique Collective PK", lines: 4, qty: 2000, unit: "PCS", warehouse: "KHI-FG-01", priority: "Normal", status: "Released", picker: "—" },
+  { id: "PL-220", order: "SO-1027", customer: "cocoon.pk Retail Customers", lines: 2, qty: 5000, unit: "MTR", warehouse: "KHI-WIP-01", priority: "Normal", status: "Draft", picker: "—" },
+  { id: "PL-221", order: "PRO-7001", customer: "Internal · Stitching", lines: 2, qty: 4200, unit: "PCS", warehouse: "KHI-ACC-01", priority: "Urgent", status: "Picked", picker: "Saba Fatima" },
+  { id: "PL-222", order: "SO-1026", customer: "UK Desi Wear Ltd", lines: 1, qty: 6000, unit: "PCS", warehouse: "KHI-FG-01", priority: "Normal", status: "Completed", picker: "Asif Khan" },
 ];
 
 const pickLines = [
@@ -26,11 +27,14 @@ const pickLines = [
   { sku: "CARTON-5P", bin: "P-01 / A1", need: 180, picked: 180, unit: "PCS" },
 ];
 
+type PickRow = (typeof initialPickLists)[number] & Record<string, unknown>;
+
 export default function PickingPage() {
   const { toast } = useToast();
+  const [rows, setRows] = useState<PickRow[]>(initialPickLists as PickRow[]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 zr-section">
       <PageHeader
         title="Pick Lists"
         description="Directed picking for sales orders, production issues and dispatch waves."
@@ -42,19 +46,72 @@ export default function PickingPage() {
           <>
             <Button
               variant="outline"
+              className="rounded-xl"
               onClick={() =>
-                toast({ title: "Wave released", description: "PL-219 assigned to picker pool.", tone: "info" })
+                toast({ title: "Wave released", description: "Open lists assigned to picker pool.", tone: "info" })
               }
             >
               <Play className="size-4" /> Release wave
             </Button>
-            <Button
-              onClick={() =>
-                toast({ title: "Pick confirmed", description: "PL-218 lines posted to packing.", tone: "success" })
-              }
-            >
-              <Check className="size-4" /> Confirm pick
-            </Button>
+            <CreateRecordDialog
+              triggerLabel="New pick list"
+              title="Create pick list"
+              description="Example: pick dyed fabric meters for an export sales order."
+              successTitle="Pick list created"
+              fields={[
+                {
+                  name: "order",
+                  label: "Order / PRO",
+                  type: "select",
+                  options: ["SO-1024", "SO-1025", "SO-1026", "SO-1027", "PRO-7001"],
+                  defaultValue: "SO-1024",
+                },
+                {
+                  name: "customer",
+                  label: "Customer / destination",
+                  defaultValue: "Boutique Collective PK",
+                },
+                { name: "qty", label: "Quantity", type: "number", defaultValue: "2000" },
+                {
+                  name: "unit",
+                  label: "Unit",
+                  type: "select",
+                  options: ["PCS", "MTR", "KG"],
+                  defaultValue: "PCS",
+                },
+                {
+                  name: "warehouse",
+                  label: "Warehouse",
+                  type: "select",
+                  options: ["KHI-FG-01", "KHI-FG-01", "KHI-WIP-01", "KHI-ACC-01"],
+                  defaultValue: "KHI-FG-01",
+                },
+                {
+                  name: "priority",
+                  label: "Priority",
+                  type: "select",
+                  options: ["Normal", "High", "Urgent"],
+                  defaultValue: "Normal",
+                },
+              ]}
+              onCreate={(values) => {
+                setRows((prev) => [
+                  {
+                    id: `PL-${222 + prev.length}`,
+                    order: values.order,
+                    customer: values.customer,
+                    lines: 1,
+                    qty: Number(values.qty) || 0,
+                    unit: values.unit,
+                    warehouse: values.warehouse,
+                    priority: values.priority,
+                    status: "Draft",
+                    picker: "—",
+                  },
+                  ...prev,
+                ]);
+              }}
+            />
           </>
         }
       />
@@ -62,9 +119,9 @@ export default function PickingPage() {
       <KpiGrid
         columns={4}
         items={[
-          { id: "open", label: "Open lists", value: String(pickLists.filter((p) => !["Completed", "Picked"].includes(p.status)).length), tone: "warning" },
-          { id: "urg", label: "Urgent", value: String(pickLists.filter((p) => p.priority === "Urgent").length), tone: "error" },
-          { id: "prog", label: "In progress", value: "1", tone: "info" },
+          { id: "open", label: "Open lists", value: String(rows.filter((p) => !["Completed", "Picked"].includes(String(p.status))).length), tone: "warning" },
+          { id: "urg", label: "Urgent", value: String(rows.filter((p) => p.priority === "Urgent").length), tone: "error" },
+          { id: "prog", label: "In progress", value: String(rows.filter((p) => p.status === "In Progress").length), tone: "info" },
           { id: "acc", label: "Accuracy (MTD)", value: "98.4%", tone: "success" },
         ]}
       />
@@ -72,10 +129,12 @@ export default function PickingPage() {
       <div className="grid gap-4 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <DataTable
-            data={pickLists as unknown as Record<string, unknown>[]}
+            data={rows as unknown as Record<string, unknown>[]}
             searchKeys={["id", "order", "customer", "warehouse", "status", "picker"]}
             searchPlaceholder="Search pick lists..."
             statusKey="status"
+            filterKey="status"
+            exportName="pick-lists"
             columns={[
               { key: "id", label: "Pick list" },
               { key: "order", label: "Order" },
@@ -131,7 +190,7 @@ export default function PickingPage() {
               </div>
             ))}
             <Link href="/warehouse/scan">
-              <Button variant="outline" className="w-full" size="sm">
+              <Button variant="outline" className="w-full rounded-xl" size="sm">
                 Open scanner
               </Button>
             </Link>

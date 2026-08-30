@@ -13,9 +13,9 @@ import { Plus } from "lucide-react";
 const defects = [
   { id: "DF-01", code: "ST-SKIP", name: "Skipped stitch", category: "Stitching", process: "Garments", count: 18, severity: "Major", batch: "BT-TS-1024", status: "Open", qc: "QC-1202" },
   { id: "DF-02", code: "ST-OPEN", name: "Open seam", category: "Stitching", process: "Garments", count: 9, severity: "Critical", batch: "BT-TS-1024", status: "Open", qc: "QC-1202" },
-  { id: "DF-03", code: "SH-DELTA", name: "Shade variation", category: "Shade", process: "Dyeing", count: 12, severity: "Critical", batch: "BT-DYE-441", status: "Under CAPA", qc: "QC-1203" },
-  { id: "DF-04", code: "FB-HOLE", name: "Hole / tear", category: "Fabric", process: "Weaving", count: 4, severity: "Major", batch: "BT-DYE-441", status: "Open", qc: "QC-1203" },
-  { id: "DF-05", code: "FB-SLUB", name: "Slub / thick place", category: "Yarn", process: "Spinning", count: 6, severity: "Minor", batch: "BT-YRN-771", status: "Closed", qc: "QC-1201" },
+  { id: "DF-03", code: "SH-DELTA", name: "Shade variation", category: "Shade", process: "Dyeing", count: 12, severity: "Critical", batch: "BT-OMBRE-441", status: "Under CAPA", qc: "QC-1203" },
+  { id: "DF-04", code: "FB-HOLE", name: "Hole / tear", category: "Fabric", process: "Cutting / Stitch", count: 4, severity: "Major", batch: "BT-OMBRE-441", status: "Open", qc: "QC-1203" },
+  { id: "DF-05", code: "FB-PRINT", name: "Print misregister", category: "Fabric", process: "Incoming", count: 6, severity: "Minor", batch: "BT-LAWN-882", status: "Closed", qc: "QC-1201" },
   { id: "DF-06", code: "MEAS", name: "Measurement out of tol.", category: "Fit", process: "Garments", count: 8, severity: "Major", batch: "BT-TS-1024", status: "Open", qc: "QC-1202" },
 ];
 

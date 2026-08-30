@@ -28,7 +28,7 @@ export default function ProductionHubPage() {
     <div className="space-y-6">
       <PageHeader
         title="Production"
-        description="Spinning, weaving, dyeing and garments orders with live efficiency."
+        description="Cutting, stitch, print and finishing orders with live efficiency."
         breadcrumbs={[{ label: "Manufacturing" }, { label: "Production" }]}
         badge="MES-ready"
         actions={
@@ -121,9 +121,9 @@ export default function ProductionHubPage() {
 function TabsWorkflows() {
   return (
     <div className="space-y-3">
-      <WorkflowStepper title="Garments · T-shirt (SO-1024)" steps={tshirtWorkflow.slice(5, 10)} />
+      <WorkflowStepper title="Garments · Prism Kaftaan (SO-1024)" steps={tshirtWorkflow.slice(5, 10)} />
       <div className="grid gap-3 lg:grid-cols-2">
-        <WorkflowStepper title="Weaving flow" steps={weavingWorkflow.slice(0, 5)} />
+        <WorkflowStepper title="Lawn RTW flow" steps={weavingWorkflow.slice(0, 5)} />
         <WorkflowStepper title="Dyeing flow" steps={dyeingWorkflow.slice(0, 5)} />
       </div>
     </div>

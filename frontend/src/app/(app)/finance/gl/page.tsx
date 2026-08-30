@@ -10,11 +10,11 @@ import { formatCurrency } from "@/lib/utils";
 import { Plus } from "lucide-react";
 
 const journals = [
-  { id: "JV-2401", date: "2026-08-28", memo: "Cotton purchase — PO-4401", debit: 18500000, credit: 18500000, status: "Posted", user: "Hassan Qureshi" },
-  { id: "JV-2402", date: "2026-08-28", memo: "Export invoice SH-5501", debit: 5040000, credit: 5040000, status: "Posted", user: "Hassan Qureshi" },
+  { id: "JV-2401", date: "2026-08-28", memo: "Cotton purchase — PO-4401", debit: 18500000, credit: 18500000, status: "Posted", user: "Waqas Anwar" },
+  { id: "JV-2402", date: "2026-08-28", memo: "Export invoice SH-5501", debit: 5040000, credit: 5040000, status: "Posted", user: "Waqas Anwar" },
   { id: "JV-2403", date: "2026-08-29", memo: "Payroll Aug week 4", debit: 6200000, credit: 6200000, status: "Draft", user: "Ayesha Noor" },
   { id: "JV-2404", date: "2026-08-29", memo: "Depreciation run — machines", debit: 1850000, credit: 1850000, status: "Posted", user: "System" },
-  { id: "JV-2405", date: "2026-08-30", memo: "Supplier payment SU-503", debit: 1800000, credit: 1800000, status: "Pending Approval", user: "Hassan Qureshi" },
+  { id: "JV-2405", date: "2026-08-30", memo: "Supplier payment SU-503", debit: 1800000, credit: 1800000, status: "Pending Approval", user: "Waqas Anwar" },
 ];
 
 type JVRow = (typeof journals)[number] & Record<string, unknown>;

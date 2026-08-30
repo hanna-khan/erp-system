@@ -11,12 +11,12 @@ import { formatNumber } from "@/lib/utils";
 import { Plus } from "lucide-react";
 
 const movements = [
-  { id: "MV-401", date: "2026-08-29 14:22", type: "Transfer", from: "FSD-WIP-01", to: "DYE-01", sku: "FAB-GREY-180", qty: 4500, unit: "MTR", status: "Completed", user: "Fatima Ali" },
-  { id: "MV-402", date: "2026-08-29 11:05", type: "Issue", from: "LHR-ACC-01", to: "SEW-LINE-01", sku: "ACC-LABEL", qty: 4200, unit: "PCS", status: "Reserved", user: "Bilal Hussain" },
-  { id: "MV-403", date: "2026-08-28 16:40", type: "Receipt", from: "GRN-8802", to: "FSD-CHM-01", sku: "CHM-DYE-NVY", qty: 720, unit: "KG", status: "Completed", user: "Warehouse Ops" },
-  { id: "MV-404", date: "2026-08-28 09:15", type: "Production", from: "SEW-LINE-01", to: "LHR-FG-01", sku: "GAR-TSH-MENS", qty: 800, unit: "PCS", status: "Completed", user: "Usman Tariq" },
-  { id: "MV-405", date: "2026-08-27 13:50", type: "Transfer", from: "FSD-RM-02", to: "WEAVE-BAY", sku: "YRN-CTN-30S", qty: 2200, unit: "KG", status: "In Transit", user: "Fatima Ali" },
-  { id: "MV-406", date: "2026-08-26 10:00", type: "Adjustment", from: "Cycle Count", to: "KHI-RM-01", sku: "RM-CTN-A", qty: -120, unit: "KG", status: "Pending", user: "Omar Farooq" },
+  { id: "MV-401", date: "2026-08-29 14:22", type: "Transfer", from: "KHI-WIP-01", to: "DYE-01", sku: "FAB-OMBRE-BLUSH", qty: 4500, unit: "MTR", status: "Completed", user: "Hira Nadeem" },
+  { id: "MV-402", date: "2026-08-29 11:05", type: "Issue", from: "KHI-ACC-01", to: "SEW-LINE-01", sku: "ACC-TAG-CCN", qty: 4200, unit: "PCS", status: "Reserved", user: "Sanaullah Khan" },
+  { id: "MV-403", date: "2026-08-28 16:40", type: "Receipt", from: "GRN-8802", to: "KHI-RM-01", sku: "CHM-OMBRE-BLUSH", qty: 720, unit: "MTR", status: "Completed", user: "Warehouse Ops" },
+  { id: "MV-404", date: "2026-08-28 09:15", type: "Production", from: "SEW-LINE-01", to: "KHI-FG-01", sku: "CCN-KAFT-PRISM", qty: 800, unit: "PCS", status: "Completed", user: "Nazia Bibi" },
+  { id: "MV-405", date: "2026-08-27 13:50", type: "Transfer", from: "KHI-RM-01", to: "WEAVE-BAY", sku: "FAB-LAWN-60", qty: 2200, unit: "MTR", status: "In Transit", user: "Hira Nadeem" },
+  { id: "MV-406", date: "2026-08-26 10:00", type: "Adjustment", from: "Cycle Count", to: "KHI-RM-01", sku: "FAB-LAWN-60", qty: -120, unit: "MTR", status: "Pending", user: "Omar Farooq" },
 ];
 
 export default function MovementsPage() {
@@ -36,7 +36,7 @@ export default function MovementsPage() {
             onClick={() =>
               toast({
                 title: "Transfer created",
-                description: "MV-407 · FSD-WIP-01 → DYE-01.",
+                description: "MV-407 · KHI-WIP-01 → DYE-01.",
                 tone: "success",
               })
             }

@@ -33,7 +33,7 @@ export default function ForgotPasswordPage() {
           >
             <div className="space-y-2">
               <Label htmlFor="email">Work email</Label>
-              <Input id="email" type="email" defaultValue="imran@abctextiles.pk" required />
+              <Input id="email" type="email" defaultValue="salman@cocoon.pk" required />
             </div>
             <Button type="submit" className="w-full">
               Send reset link

@@ -13,8 +13,8 @@ import { formatCurrency, formatNumber, formatPercent } from "@/lib/utils";
 const profitability = [
   {
     id: "P1",
-    product: "Men's T-Shirt",
-    style: "TS-BASIC-27",
+    product: "Prism Kaftaan 2-Piece",
+    style: "CCN-KAFT-PRISM",
     revenue: 890,
     cost: costSheet.actual.total,
     margin: 890 - costSheet.actual.total,
@@ -24,19 +24,19 @@ const profitability = [
   },
   {
     id: "P2",
-    product: "Polo Shirt",
-    style: "POLO-CORE-26",
+    product: "Matcha | 2-Piece",
+    style: "CCN-RTW-MATCHA",
     revenue: 1450,
     cost: 1095,
     margin: 355,
     marginPct: (355 / 1450) * 100,
     volume: 6000,
-    sheet: "CS-POLO-26",
+    sheet: "CS-MATCHA-26",
   },
   {
     id: "P3",
-    product: "Dyed Fabric Reactive",
-    style: "DF-REAC-58",
+    product: "Fairy Meadows 2-Piece",
+    style: "CCN-LAWN-FAIRY",
     revenue: 420,
     cost: 412,
     margin: 8,
@@ -46,19 +46,19 @@ const profitability = [
   },
   {
     id: "P4",
-    product: "Cotton Fabric 180 GSM",
-    style: "GREY-180",
+    product: "Printed Lawn Fabric (60\")",
+    style: "LAWN-60",
     revenue: 285,
     cost: 258,
     margin: 27,
     marginPct: (27 / 285) * 100,
     volume: 25000,
-    sheet: "CS-GREY-180",
+    sheet: "CS-LAWN-60",
   },
   {
     id: "P5",
-    product: "Cotton Yarn 30s",
-    style: "YRN-CTN-30S",
+    product: "Printed Lawn Fabric (60\")",
+    style: "FAB-LAWN-60",
     revenue: 620,
     cost: 485,
     margin: 135,
@@ -203,7 +203,7 @@ export default function ProfitabilityPage() {
             </p>
             <Link href="/costing/sheets/CS-TS-27">
               <Button variant="outline" size="sm" className="w-full">
-                Review T-shirt variance
+                Review Prism Kaftaan variance
               </Button>
             </Link>
           </CardContent>

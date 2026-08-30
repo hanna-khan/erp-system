@@ -1,16 +1,25 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { DataTable, type Column } from "@/components/shared/data-table";
+import { CreateRecordDialog } from "@/components/shared/create-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { employees, statusTone } from "@/mock/data";
-import { useToast } from "@/hooks/use-toast";
 import { formatDate } from "@/lib/utils";
-import { Plus } from "lucide-react";
 
-type EmpRow = (typeof employees)[number] & Record<string, unknown>;
+type EmpRow = {
+  id: string;
+  name: string;
+  department: string;
+  designation: string;
+  plant: string;
+  shift: string;
+  status: string;
+  joinDate: string;
+} & Record<string, unknown>;
 
 const columns: Column<EmpRow>[] = [
   { key: "id", label: "Employee #" },
@@ -32,10 +41,10 @@ const columns: Column<EmpRow>[] = [
 ];
 
 export default function EmployeesPage() {
-  const { toast } = useToast();
+  const [rows, setRows] = useState<EmpRow[]>(employees as EmpRow[]);
 
   return (
-    <div className="animate-fade-in space-y-6">
+    <div className="animate-fade-in space-y-6 zr-section">
       <PageHeader
         title="Employees"
         description="Active workforce across plants."
@@ -45,26 +54,69 @@ export default function EmployeesPage() {
         ]}
         actions={
           <>
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="rounded-xl">
               <Link href="/hr/attendance">Attendance</Link>
             </Button>
-            <Button
-              onClick={() =>
-                toast({ title: "Employee form", description: "Onboarding wizard opened.", tone: "info" })
-              }
-            >
-              <Plus className="size-4" /> Add Employee
-            </Button>
+            <CreateRecordDialog
+              triggerLabel="Add Employee"
+              title="Onboard employee"
+              description="Example: hire a sewing operator for SITE Karachi Plant Shift A."
+              successTitle="Employee added"
+              fields={[
+                { name: "name", label: "Full name", defaultValue: "New Operator" },
+                {
+                  name: "department",
+                  label: "Department",
+                  type: "select",
+                  options: ["Production", "Quality", "Cutting", "HR", "Maintenance"],
+                  defaultValue: "Production",
+                },
+                { name: "designation", label: "Designation", defaultValue: "Machine Operator" },
+                {
+                  name: "plant",
+                  label: "Plant",
+                  type: "select",
+                  options: ["SITE Karachi Plant", "Karachi FG Warehouse", "Online Fulfillment Hub"],
+                  defaultValue: "SITE Karachi Plant",
+                },
+                {
+                  name: "shift",
+                  label: "Shift",
+                  type: "select",
+                  options: ["A", "B", "General"],
+                  defaultValue: "A",
+                },
+                { name: "joinDate", label: "Join date", type: "date", defaultValue: "2026-09-01" },
+              ]}
+              onCreate={(values) => {
+                setRows((prev) => [
+                  {
+                    id: `EMP-${1005 + prev.length}`,
+                    name: values.name,
+                    department: values.department,
+                    designation: values.designation,
+                    plant: values.plant,
+                    shift: values.shift,
+                    status: "Active",
+                    joinDate: values.joinDate,
+                  },
+                  ...prev,
+                ]);
+              }}
+            />
           </>
         }
       />
 
       <DataTable
-        data={employees as EmpRow[]}
+        data={rows}
         columns={columns}
         searchKeys={["id", "name", "department", "designation", "plant", "status"]}
         searchPlaceholder="Search employees..."
         rowHref={(row) => `/hr/employees/${row.id}`}
+        statusKey="status"
+        filterKey="status"
+        exportName="employees"
       />
     </div>
   );

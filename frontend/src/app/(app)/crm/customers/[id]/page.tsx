@@ -45,9 +45,9 @@ const paymentsByCustomer: Record<
 };
 
 const communications = [
-  { id: "1", type: "Email", subject: "SS27 tee program — size ratio confirmation", user: "Zainab Rizvi", time: "2026-08-26 14:20" },
-  { id: "2", type: "Call", subject: "Discussed delivery window for SO-1024", user: "Zainab Rizvi", time: "2026-08-24 11:05" },
-  { id: "3", type: "Meeting", subject: "Factory visit — packing & carton specs", user: "Imran Malik", time: "2026-08-18 09:30" },
+  { id: "1", type: "Email", subject: "Prism Kaftaan wholesale program — size ratio confirmation", user: "Areeba Malik", time: "2026-08-26 14:20" },
+  { id: "2", type: "Call", subject: "Discussed delivery window for SO-1024", user: "Areeba Malik", time: "2026-08-24 11:05" },
+  { id: "3", type: "Meeting", subject: "Factory visit — packing & carton specs", user: "Salman Sabir", time: "2026-08-18 09:30" },
 ];
 
 export default function CustomerDetailPage({
